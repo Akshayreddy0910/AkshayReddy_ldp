@@ -1,0 +1,14 @@
+var name = "Akshay";
+console.log("Name:", name);
+let age = 21;
+console.log("Age:", age);
+const college = "ABC Engineering College";
+console.log("College:", college);
+age = 22;
+console.log("Updated Age:", age);
+var name = "Sunny";
+console.log("Updated Name:", name);
+let city = "Hyderabad";
+let isStudent = true;
+console.log(city);
+console.log(isStudent);
