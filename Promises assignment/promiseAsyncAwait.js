@@ -1,4 +1,4 @@
-const fetchUserEmail = (uid) => {
+const fetchUserEmail = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             console.log(`Fetched data for ${uid}`);
