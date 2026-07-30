@@ -1,7 +1,3 @@
-interface IconProps {
-  type: "close" | "attachment";
-}
-
 const styles = {
   icon: {
     fontSize: "16px",
@@ -9,14 +5,12 @@ const styles = {
   },
 };
 
-const Icon = ({ type }: IconProps) => {
-  const getSymbol = () => {
-    if (type === "close") return "✕";
-    if (type === "attachment") return "📎";
-    return "";
-  };
+interface IconProps {
+  icon: React.ReactNode;
+}
 
-  return <span style={styles.icon}>{getSymbol()}</span>;
+const Icon = ({ icon }: IconProps) => {
+  return <span style={styles.icon}>{icon}</span>;
 };
 
 export default Icon;
