@@ -1,6 +1,7 @@
 import Typography from "../../atoms/Typography";
 import Button from "../../atoms/Button";
 import Icon from "../../atoms/Icon";
+import { NOTICE_CARD_TEXT } from "../../../utils/constants";
 
 const styles = {
   card: {
@@ -69,73 +70,67 @@ const styles = {
 
 const NoticeCard = () => {
   const handleSubmit = () => {
-    alert("Notice submitted!");
+    alert(NOTICE_CARD_TEXT.submitAlertMessage);
   };
 
   return (
     <div style={styles.card}>
       <div style={styles.headerRow}>
-        <Typography text="Pre-Adverse Action Notice" variant="title" bold />
-        <Icon type="close" />
+        <Typography text={NOTICE_CARD_TEXT.title} variant="title" bold />
+        <Icon icon={<span>&times;</span>} />
       </div>
 
       <hr style={styles.divider} />
 
-      <Typography text="From: Kyle@Checkr.Com" variant="label" />
+      <Typography text={NOTICE_CARD_TEXT.from} variant="label" />
       <div style={styles.spacingSmall}>
-        <Typography text="To: John.Smith@Checkr.Com" variant="label" />
+        <Typography text={NOTICE_CARD_TEXT.to} variant="label" />
       </div>
       <div style={styles.spacingSmallBottom}>
-        <Typography text="Subject: Pre-Adverse Action Notice - Checkr-Bpo" variant="label" bold />
+        <Typography text={NOTICE_CARD_TEXT.subject} variant="label" bold />
       </div>
 
       <div style={styles.warningBox}>
-        <Typography
-          text="• Please carefully review the list of charges (in bold) and your contact information."
-          variant="small"
-        />
+        <Typography text={NOTICE_CARD_TEXT.warningLine1} variant="small" />
         <div style={styles.spacingSmall}>
-          <Typography
-            text="• Please note that we will send the corresponding post adverse action email automatically after 7 days."
-            variant="small"
-          />
+          <Typography text={NOTICE_CARD_TEXT.warningLine2} variant="small" />
         </div>
       </div>
 
-      <Typography text="Dear John Smith," />
+      <Typography text={NOTICE_CARD_TEXT.greeting} />
       <div style={styles.spacingMedium}>
-        <Typography text='You recently authorized checkr-bpo ("the company") to obtain consumer reports and/or investigate consumer reports about you from a consumer reporting agency. The Company is considering taking action in whole or in part on information in such report(s) including the following specific items identified in the report prepared by Checkr, Inc.' />
+        <Typography text={NOTICE_CARD_TEXT.bodyParagraph} />
       </div>
 
       <div style={styles.spacingMedium}>
-        <Typography text="• Assault Domestic Violence" bold />
+        <Typography text={NOTICE_CARD_TEXT.chargeItem} bold />
       </div>
 
       <div style={styles.spacingMedium}>
-        <Typography text="If you wish to dispute the accuracy of the information in the report directly with the consumer reporting agency (i.e., the source of the information contained in the report), you should contact the agency identified above directly." />
+        <Typography text={NOTICE_CARD_TEXT.disputeParagraph} />
       </div>
 
       <div style={styles.spacingLarge}>
-        <Typography text="Sincerely," />
-        <Typography text="Checkr-bpo" />
+        <Typography text={NOTICE_CARD_TEXT.signOffLine1} />
+        <Typography text={NOTICE_CARD_TEXT.signOffLine2} />
       </div>
 
       <div style={styles.spacingXLarge}>
-        <Typography text="Attachments" bold />
+        <Typography text={NOTICE_CARD_TEXT.attachmentsHeading} bold />
         <div style={styles.attachmentRow}>
-          <Icon type="attachment" />
-          <Typography text="Summary of right under the FCRA" variant="small" />
+          <Icon icon={<span>📎</span>} />
+          <Typography text={NOTICE_CARD_TEXT.attachment1} variant="small" />
         </div>
         <div style={styles.attachmentRowSpaced}>
-          <Icon type="attachment" />
-          <Typography text="Copy of background report" variant="small" />
+          <Icon icon={<span>📎</span>} />
+          <Typography text={NOTICE_CARD_TEXT.attachment2} variant="small" />
         </div>
       </div>
 
       <hr style={styles.dividerBottom} />
 
       <div style={styles.buttonRow}>
-        <Button label="Submit Notice" onClick={handleSubmit} />
+        <Button label={NOTICE_CARD_TEXT.submitButton} onClick={handleSubmit} />
       </div>
     </div>
   );
