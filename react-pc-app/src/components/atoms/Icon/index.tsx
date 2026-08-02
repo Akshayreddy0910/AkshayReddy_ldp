@@ -1,16 +1,14 @@
-const styles = {
-  icon: {
-    fontSize: "16px",
-    color: "dimgray",
-  },
-};
+import CloseIcon from "@mui/icons-material/Close";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 interface IconProps {
-  icon: React.ReactNode;
+  type: "close" | "attachment";
 }
 
-const Icon = ({ icon }: IconProps) => {
-  return <span style={styles.icon}>{icon}</span>;
+const Icon = ({ type }: IconProps) => {
+  if (type === "close") return <CloseIcon color="action" />;
+  if (type === "attachment") return <AttachFileIcon color="action" fontSize="small" />;
+  return null;
 };
 
 export default Icon;

@@ -1,47 +1,32 @@
+import MuiTypography from "@mui/material/Typography";
+
 interface TypographyProps {
   text: string;
   variant?: "title" | "label" | "body" | "small";
   bold?: boolean;
+  color?: string;
 }
 
-const styles = {
-  base: {
-    margin: 0,
-    color: "darkslategray",
-    textAlign: "left" as const,
-  },
-  title: {
-    fontSize: "20px",
-  },
-  label: {
-    fontSize: "14px",
-  },
-  small: {
-    fontSize: "12px",
-  },
-  body: {
-    fontSize: "14px",
-  },
-  bold: {
-    fontWeight: "bold" as const,
-  },
-  normal: {
-    fontWeight: "normal" as const,
-  },
-};
+const Typography = ({ text, variant = "body", bold = false, color }: TypographyProps) => {
+  const getMuiVariant = (): "h5" | "body2" | "caption" | "body1" => {
+    if (variant === "title") return "h5";
+    if (variant === "label") return "body2";
+    if (variant === "small") return "caption";
+    return "body1";
+  };
 
-const Typography = ({ text, variant = "body", bold = false }: TypographyProps) => {
-  const getVariantStyle = () => {
-    if (variant === "title") return styles.title;
-    if (variant === "label") return styles.label;
-    if (variant === "small") return styles.small;
-    return styles.body;
+  const getColor = () => {
+    if (color) return color;
+    return bold ? "#0A0B0D" : "#696A6E";
   };
 
   return (
-    <p style={{ ...styles.base, ...getVariantStyle(), ...(bold ? styles.bold : styles.normal) }}>
+    <MuiTypography
+      variant={getMuiVariant()}
+      sx={{ fontWeight: bold ? "bold" : "normal", textAlign: "left", color: getColor() }}
+    >
       {text}
-    </p>
+    </MuiTypography>
   );
 };
 
