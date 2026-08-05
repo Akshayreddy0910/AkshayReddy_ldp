@@ -34,7 +34,7 @@ const theme = createTheme({
   },
 
   typography: {
-    fontFamily: `"Inter"`,
+    fontFamily: "Inter, sans-serif",
     
 
     h4: {
