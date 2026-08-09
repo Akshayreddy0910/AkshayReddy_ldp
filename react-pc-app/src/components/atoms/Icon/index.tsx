@@ -1,16 +1,12 @@
-const styles = {
-  icon: {
-    fontSize: "16px",
-    color: "dimgray",
-  },
-};
+import type { CSSProperties, ReactNode } from "react";
 
 interface IconProps {
-  icon: React.ReactNode;
+  icon: ReactNode;
+  style?: CSSProperties;
 }
 
-const Icon = ({ icon }: IconProps) => {
-  return <span style={styles.icon}>{icon}</span>;
+const Icon = ({ icon, style }: IconProps) => {
+  return <span style={style}>{icon}</span>;
 };
 
 export default Icon;
