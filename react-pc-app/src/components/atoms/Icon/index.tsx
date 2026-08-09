@@ -1,14 +1,14 @@
-import CloseIcon from "@mui/icons-material/Close";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
+import type { ElementType } from "react";
+import type { SvgIconProps } from "@mui/material/SvgIcon";
 
 interface IconProps {
-  type: "close" | "attachment";
+  icon: ElementType<SvgIconProps>;
+  color?: SvgIconProps["color"];
+  fontSize?: SvgIconProps["fontSize"];
 }
 
-const Icon = ({ type }: IconProps) => {
-  if (type === "close") return <CloseIcon color="action" />;
-  if (type === "attachment") return <AttachFileIcon color="action" fontSize="small" />;
-  return null;
+const Icon = ({ icon: IconComponent, color, fontSize }: IconProps) => {
+  return <IconComponent color={color} fontSize={fontSize} />;
 };
 
 export default Icon;
