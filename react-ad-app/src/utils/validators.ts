@@ -1,6 +1,3 @@
-// Simple validation helpers for the login and signup forms
-
-// checks if the email typed by the user looks like a real email
 export const validateEmail = (email: string): string => {
   if (!email) {
     return "Email is required";
