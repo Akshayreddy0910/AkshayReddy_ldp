@@ -1,23 +1,14 @@
+import type { CSSProperties } from "react";
+
 interface ButtonProps {
   label: string;
   onClick?: () => void;
+  style?: CSSProperties;
 }
 
-const styles = {
-  button: {
-    backgroundColor: "darkviolet",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-    padding: "10px 20px",
-    fontSize: "14px",
-    cursor: "pointer",
-  },
-};
-
-const Button = ({ label, onClick }: ButtonProps) => {
+const Button = ({ label, onClick, style }: ButtonProps) => {
   return (
-    <button onClick={onClick} style={styles.button}>
+    <button onClick={onClick} style={style}>
       {label}
     </button>
   );
