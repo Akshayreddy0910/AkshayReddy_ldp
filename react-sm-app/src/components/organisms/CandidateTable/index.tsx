@@ -23,18 +23,28 @@ import Button from "../../atoms/Button";
 import SearchInput from "../../atoms/SearchInput";
 import StatusBadge from "../../atoms/StatusBadge";
 
-import { candidates } from "../../../data/candidates";
+import { candidates, type Candidate } from "../../../data/candidates";
+import {
+  CANDIDATE_TABLE_HEADERS,
+  CANDIDATE_TABLE_TEXT,
+  DEFAULT_PAGE_SIZE,
+  PAGE_SIZE_LABEL_SUFFIX,
+  PAGE_SIZE_OPTIONS,
+} from "../../../utils/constants";
+
+import { styles } from "./styles";
 
 const CandidateTable = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredCandidates, setFilteredCandidates] = useState(candidates);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredCandidates, setFilteredCandidates] =
+    useState<Candidate[]>(candidates);
 
   useEffect(() => {
     const query = searchQuery.toLowerCase();
 
     setFilteredCandidates(
       candidates.filter(
-        (candidate) =>
+        (candidate: Candidate) =>
           candidate.name.toLowerCase().includes(query) ||
           candidate.location.toLowerCase().includes(query)
       )
@@ -42,39 +52,26 @@ const CandidateTable = () => {
   }, [searchQuery]);
 
   return (
-    <Paper sx={{ borderRadius: 3, overflow: "hidden" }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          p: 3,
-        }}
-      >
-        <Typography
-          text="Candidate Information"
-          variant="subheading"
-          bold
-        />
+    <Paper sx={styles.paper}>
+      <Box sx={styles.header}>
+        <Typography text={CANDIDATE_TABLE_TEXT.title} variant="subheading" />
 
-        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+        <Box sx={styles.headerActions}>
           <SearchInput
             value={searchQuery}
             onChange={setSearchQuery}
-            placeholder="Search by name or location"
+            placeholder={CANDIDATE_TABLE_TEXT.searchPlaceholder}
           />
 
           <Button
-            label="Filter"
+            label={CANDIDATE_TABLE_TEXT.filterLabel}
             variant="outline"
             icon={<FilterListOutlinedIcon />}
           />
 
-          <Button
-            label=""
-            variant="outline"
-            icon={<MoreVertOutlinedIcon />}
-          />
+          <IconButton size="small">
+            <MoreVertOutlinedIcon />
+          </IconButton>
         </Box>
       </Box>
 
@@ -82,16 +79,14 @@ const CandidateTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>NAME</TableCell>
-              <TableCell>ADJUDICATION</TableCell>
-              <TableCell>STATUS</TableCell>
-              <TableCell>LOCATION</TableCell>
-              <TableCell>DATE</TableCell>
+              {CANDIDATE_TABLE_HEADERS.map((header: string) => (
+                <TableCell key={header}>{header}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {filteredCandidates.map((candidate, index) => (
+            {filteredCandidates.map((candidate: Candidate, index: number) => (
               <TableRow key={index} hover>
                 <TableCell>
                   <Typography text={candidate.name} variant="link" />
@@ -112,36 +107,33 @@ const CandidateTable = () => {
         </Table>
       </TableContainer>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          px: 3,
-          py: 2,
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+      <Box sx={styles.footer}>
+        <Box sx={styles.footerLeft}>
           <Typography
-            text={`${filteredCandidates.length} out of 84 results`}
+            text={`${filteredCandidates.length} ${CANDIDATE_TABLE_TEXT.resultsSuffix.replace(
+              "{total}",
+              String(CANDIDATE_TABLE_TEXT.totalResults)
+            )}`}
             variant="label"
           />
 
-          <Select size="small" defaultValue={10}>
-            <MenuItem value={10}>10 per page</MenuItem>
-            <MenuItem value={20}>20 per page</MenuItem>
-            <MenuItem value={30}>30 per page</MenuItem>
+          <Select size="small" defaultValue={DEFAULT_PAGE_SIZE}>
+            {PAGE_SIZE_OPTIONS.map((size: number) => (
+              <MenuItem key={size} value={size}>
+                {size} {PAGE_SIZE_LABEL_SUFFIX}
+              </MenuItem>
+            ))}
           </Select>
         </Box>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Box sx={styles.footerRight}>
           <IconButton size="small">
             <ChevronLeftOutlinedIcon />
           </IconButton>
 
-          <Button label="1" variant="primary" />
-          <Button label="2" variant="outline" />
-          <Button label="3" variant="outline" />
+          <Button label="1" variant="primary" sx={styles.pageButton} />
+          <Button label="2" variant="outline" sx={styles.pageButton} />
+          <Button label="3" variant="outline" sx={styles.pageButton} />
 
           <IconButton size="small">
             <ChevronRightOutlinedIcon />

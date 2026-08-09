@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 
 import Sidebar from "./components/molecules/Sidebar";
 import TopBar from "./components/molecules/TopBar";
-import CandidateTable from "./components/molecules/CandidateTable";
+import CandidateTable from "./components/organisms/CandidateTable";
 
 const App = () => {
   return (

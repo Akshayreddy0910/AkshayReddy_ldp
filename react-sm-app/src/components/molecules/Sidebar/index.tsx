@@ -1,10 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Divider,
-  Drawer,
-  List,
-} from "@mui/material";
+import { Avatar, Box, Divider, Drawer, List } from "@mui/material";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
@@ -14,15 +8,32 @@ import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { useTheme } from "@mui/material/styles";
+import type { ReactNode } from "react";
 
 import Typography from "../../atoms/Typography";
 import SidebarLink from "../../atoms/SidebarLink";
 
 import profile from "../../../assets/profile.jpg";
+import { APP_NAME, CURRENT_USER, SIDEBAR_LINKS } from "../../../utils/constants";
 
 const drawerWidth = 240;
 
+const ICONS_BY_KEY: Record<(typeof SIDEBAR_LINKS)[number]["key"], ReactNode> = {
+  home: <HomeOutlinedIcon />,
+  candidates: <GroupsOutlinedIcon />,
+  adverseActions: <WarningAmberOutlinedIcon />,
+  logs: <DescriptionOutlinedIcon />,
+  analytics: <AnalyticsOutlinedIcon />,
+  account: <PersonOutlineOutlinedIcon />,
+  screenings: <FolderOpenOutlinedIcon />,
+};
+
+const ACTIVE_LINK_KEY = "candidates";
+
 const Sidebar = () => {
+  const theme = useTheme();
+
   return (
     <Drawer
       variant="permanent"
@@ -33,7 +44,6 @@ const Sidebar = () => {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-          borderRight: "1px solid #E5E7EB",
           p: 2.5,
           display: "flex",
           justifyContent: "space-between",
@@ -41,11 +51,7 @@ const Sidebar = () => {
       }}
     >
       <Box>
-        <Typography
-          text="RECRUIT"
-          variant="subheading"
-          bold
-        />
+        <Typography text={APP_NAME} variant="subheading" />
 
         <List
           sx={{
@@ -55,41 +61,14 @@ const Sidebar = () => {
             gap: 0.5,
           }}
         >
-          <SidebarLink
-            label="Home"
-            icon={<HomeOutlinedIcon />}
-          />
-
-          <SidebarLink
-            label="Candidates"
-            icon={<GroupsOutlinedIcon />}
-            active
-          />
-
-          <SidebarLink
-            label="Adverse Actions"
-            icon={<WarningAmberOutlinedIcon />}
-          />
-
-          <SidebarLink
-            label="Logs"
-            icon={<DescriptionOutlinedIcon />}
-          />
-
-          <SidebarLink
-            label="Analytics"
-            icon={<AnalyticsOutlinedIcon />}
-          />
-
-          <SidebarLink
-            label="Account"
-            icon={<PersonOutlineOutlinedIcon />}
-          />
-
-          <SidebarLink
-            label="Screenings"
-            icon={<FolderOpenOutlinedIcon />}
-          />
+          {SIDEBAR_LINKS.map((link) => (
+            <SidebarLink
+              key={link.key}
+              label={link.label}
+              icon={ICONS_BY_KEY[link.key]}
+              active={link.key === ACTIVE_LINK_KEY}
+            />
+          ))}
         </List>
       </Box>
 
@@ -112,20 +91,13 @@ const Sidebar = () => {
           />
 
           <Box sx={{ flexGrow: 1 }}>
-            <Typography
-              text="James Rodriguez"
-              bold
-            />
-
-            <Typography
-              text="James.co"
-              variant="label"
-            />
+            <Typography text={CURRENT_USER.name} sx={{ fontWeight: 600 }} />
+            <Typography text={CURRENT_USER.handle} variant="label" />
           </Box>
 
           <LogoutOutlinedIcon
             sx={{
-              color: "#64748B",
+              color: theme.palette.text.secondary,
               cursor: "pointer",
             }}
           />

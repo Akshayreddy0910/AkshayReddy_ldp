@@ -4,6 +4,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 import Typography from "../../atoms/Typography";
 import Button from "../../atoms/Button";
+import { TOPBAR_TEXT } from "../../../utils/constants";
 
 const TopBar = () => {
   return (
@@ -15,11 +16,7 @@ const TopBar = () => {
         mb: 3,
       }}
     >
-      <Typography
-        text="Candidates"
-        variant="heading"
-        bold
-      />
+      <Typography text={TOPBAR_TEXT.title} variant="heading" />
 
       <Box
         sx={{
@@ -28,13 +25,13 @@ const TopBar = () => {
         }}
       >
         <Button
-          label="Export"
+          label={TOPBAR_TEXT.exportLabel}
           variant="outline"
           icon={<DownloadOutlinedIcon />}
         />
 
         <Button
-          label="Manual Order"
+          label={TOPBAR_TEXT.manualOrderLabel}
           variant="primary"
           icon={<AddOutlinedIcon />}
         />
