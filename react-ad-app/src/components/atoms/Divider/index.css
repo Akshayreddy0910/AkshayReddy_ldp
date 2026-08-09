@@ -1,0 +1,10 @@
+.custom-divider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.custom-divider-line {
+  flex: 1;
+}

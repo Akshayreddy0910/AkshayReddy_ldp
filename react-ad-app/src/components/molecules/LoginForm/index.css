@@ -1,0 +1,16 @@
+.login-form {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.login-form-title {
+  margin-bottom: 8px;
+}
+
+.login-form-forgot {
+  display: flex;
+  justify-content: flex-start;
+}

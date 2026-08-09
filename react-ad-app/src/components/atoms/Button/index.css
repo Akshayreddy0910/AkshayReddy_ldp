@@ -1,0 +1,21 @@
+.custom-button.button-contained {
+  background-color: #6c5dd3;
+  color: #ffffff;
+  border-color: #3a3641;
+}
+
+.custom-button.button-contained:hover {
+  background-color: #5b4bc4;
+  border-color: #6c5dd3;
+}
+
+.custom-button.button-outlined {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #3a3641;
+}
+
+.custom-button.button-outlined:hover {
+  background-color: #2a272e;
+  border-color: #6c5dd3;
+}
