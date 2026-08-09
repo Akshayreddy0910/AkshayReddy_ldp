@@ -3,11 +3,13 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import type { SxProps, Theme } from "@mui/material/styles";
 
+import { getSearchInputSx } from "./styles";
+
 interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-  width?: number | string;
+  width: number | string;
   sx?: SxProps<Theme>;
 }
 
@@ -15,7 +17,7 @@ const SearchInput = ({
   value,
   onChange,
   placeholder = "Search",
-  width = 320,
+  width,
   sx,
 }: SearchInputProps) => {
   return (
@@ -24,10 +26,7 @@ const SearchInput = ({
       placeholder={placeholder}
       size="small"
       onChange={(e) => onChange(e.target.value)}
-      sx={{
-        width,
-        ...sx,
-      }}
+      sx={getSearchInputSx(width, sx)}
       slotProps={{
         input: {
           startAdornment: (

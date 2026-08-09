@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   Box,
   IconButton,
@@ -23,7 +22,7 @@ import Button from "../../atoms/Button";
 import SearchInput from "../../atoms/SearchInput";
 import StatusBadge from "../../atoms/StatusBadge";
 
-import { candidates, type Candidate } from "../../../data/candidates";
+import type { Candidate } from "../../../data/candidates";
 import {
   CANDIDATE_TABLE_HEADERS,
   CANDIDATE_TABLE_TEXT,
@@ -33,23 +32,10 @@ import {
 } from "../../../utils/constants";
 
 import { styles } from "./styles";
+import { useCandidates } from "./useCandidates";
 
 const CandidateTable = () => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filteredCandidates, setFilteredCandidates] =
-    useState<Candidate[]>(candidates);
-
-  useEffect(() => {
-    const query = searchQuery.toLowerCase();
-
-    setFilteredCandidates(
-      candidates.filter(
-        (candidate: Candidate) =>
-          candidate.name.toLowerCase().includes(query) ||
-          candidate.location.toLowerCase().includes(query)
-      )
-    );
-  }, [searchQuery]);
+  const { searchQuery, setSearchQuery, filteredCandidates } = useCandidates();
 
   return (
     <Paper sx={styles.paper}>
@@ -61,6 +47,7 @@ const CandidateTable = () => {
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder={CANDIDATE_TABLE_TEXT.searchPlaceholder}
+            width={320}
           />
 
           <Button

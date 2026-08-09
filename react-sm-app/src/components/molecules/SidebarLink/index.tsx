@@ -1,7 +1,7 @@
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import type { ReactNode } from "react";
 
-import Typography from "../Typography";
+import Typography from "../../atoms/Typography";
 
 interface SidebarLinkProps {
   label: string;

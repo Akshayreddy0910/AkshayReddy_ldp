@@ -8,16 +8,15 @@ import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { useTheme } from "@mui/material/styles";
 import type { ReactNode } from "react";
 
 import Typography from "../../atoms/Typography";
-import SidebarLink from "../../atoms/SidebarLink";
+import SidebarLink from "../SidebarLink";
 
 import profile from "../../../assets/profile.jpg";
 import { APP_NAME, CURRENT_USER, SIDEBAR_LINKS } from "../../../utils/constants";
 
-const drawerWidth = 240;
+import { styles } from "./styles";
 
 const ICONS_BY_KEY: Record<(typeof SIDEBAR_LINKS)[number]["key"], ReactNode> = {
   home: <HomeOutlinedIcon />,
@@ -32,35 +31,12 @@ const ICONS_BY_KEY: Record<(typeof SIDEBAR_LINKS)[number]["key"], ReactNode> = {
 const ACTIVE_LINK_KEY = "candidates";
 
 const Sidebar = () => {
-  const theme = useTheme();
-
   return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-
-        "& .MuiDrawer-paper": {
-          width: drawerWidth,
-          boxSizing: "border-box",
-          p: 2.5,
-          display: "flex",
-          justifyContent: "space-between",
-        },
-      }}
-    >
+    <Drawer variant="permanent" sx={styles.drawer}>
       <Box>
         <Typography text={APP_NAME} variant="subheading" />
 
-        <List
-          sx={{
-            mt: 4,
-            display: "flex",
-            flexDirection: "column",
-            gap: 0.5,
-          }}
-        >
+        <List sx={styles.linkList}>
           {SIDEBAR_LINKS.map((link) => (
             <SidebarLink
               key={link.key}
@@ -73,34 +49,17 @@ const Sidebar = () => {
       </Box>
 
       <Box>
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={styles.divider} />
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1.5,
-          }}
-        >
-          <Avatar
-            src={profile}
-            sx={{
-              width: 40,
-              height: 40,
-            }}
-          />
+        <Box sx={styles.profileRow}>
+          <Avatar src={profile} sx={styles.avatar} />
 
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography text={CURRENT_USER.name} sx={{ fontWeight: 600 }} />
+          <Box sx={styles.profileText}>
+            <Typography text={CURRENT_USER.name} sx={styles.profileName} />
             <Typography text={CURRENT_USER.handle} variant="label" />
           </Box>
 
-          <LogoutOutlinedIcon
-            sx={{
-              color: theme.palette.text.secondary,
-              cursor: "pointer",
-            }}
-          />
+          <LogoutOutlinedIcon sx={styles.logoutIcon} />
         </Box>
       </Box>
     </Drawer>

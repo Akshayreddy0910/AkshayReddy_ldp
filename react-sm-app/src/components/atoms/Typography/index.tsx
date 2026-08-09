@@ -1,16 +1,18 @@
 import MuiTypography from "@mui/material/Typography";
+import type { TypographyVariant } from "@mui/material/styles";
 import type { SxProps, Theme } from "@mui/material/styles";
+
+type CustomVariant = "heading" | "subheading" | "label" | "link";
 
 interface TypographyProps {
   text: string;
-  variant?: "heading" | "subheading" | "label" | "body";
+  variant?: TypographyVariant | CustomVariant;
   sx?: SxProps<Theme>;
 }
 
-const Typography = ({ text, variant = "body", sx }: TypographyProps) => {
-  const muiVariant = variant === "body" ? "body1" : (variant as any);
+const Typography = ({ text, variant = "body1", sx }: TypographyProps) => {
   return (
-    <MuiTypography variant={muiVariant} sx={sx}>
+    <MuiTypography variant={variant} sx={sx}>
       {text}
     </MuiTypography>
   );
