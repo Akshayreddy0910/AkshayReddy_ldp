@@ -1,12 +1,46 @@
+const knownDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"];
+const countDifferentLetters = (wordA: string, wordB: string): number => {
+  let count = 0;
+  for (let i = 0; i < wordA.length; i++) {
+    if (wordA[i] !== wordB[i]) {
+      count++;
+    }
+  }
+  return count;
+};
+const findCloseDomain = (domain: string): string => {
+  for (const knownDomain of knownDomains) {
+    if (domain === knownDomain) {
+      return "";
+    }
+
+    if (domain.length === knownDomain.length) {
+      const diff = countDifferentLetters(domain, knownDomain);
+
+      if (diff === 1 || diff === 2) {
+        return knownDomain;
+      }
+    }
+  }
+  return "";
+};
+
 export const validateEmail = (email: string): string => {
   if (!email) {
     return "Email is required";
   }
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
 
   if (!emailPattern.test(email)) {
     return "Please enter a valid email address";
+  }
+
+  const domain = email.split("@")[1].toLowerCase();
+  const suggestedDomain = findCloseDomain(domain);
+
+  if (suggestedDomain) {
+    return `Did you mean ${suggestedDomain}?`;
   }
 
   return "";
