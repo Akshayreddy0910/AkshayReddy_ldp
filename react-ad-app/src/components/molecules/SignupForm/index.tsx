@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Snackbar, Alert } from "@mui/material";
 
 import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
@@ -16,6 +16,8 @@ const SignupForm = () => {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -53,29 +55,21 @@ const SignupForm = () => {
     setPasswordError(passwordErrorMessage);
 
     if (!nameErrorMessage && !emailErrorMessage && !passwordErrorMessage) {
-      // form is valid, we can continue with signup here
-      console.log("Signup form submitted", { name, email, password });
+      setShowSuccess(true);
     }
   };
 
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+  };
+
   return (
-    <Box
-      component="form"
-      className="signup-form"
-      onSubmit={handleSubmit}
-    >
+    <Box component="form" className="signup-form" onSubmit={handleSubmit}>
       <Box>
-        <Typography
-          variant="h4"
-          className="signup-form-title"
-        >
+        <Typography variant="h4" className="signup-form-title">
           Sign Up ✨
         </Typography>
-
-        <Typography
-          variant="body2"
-          color="text.secondary"
-        >
+        <Typography variant="body2" color="text.secondary">
           Enter your details to create your account.
         </Typography>
       </Box>
@@ -112,10 +106,18 @@ const SignupForm = () => {
         helperText={passwordError}
       />
 
-      <Button
-        text="Sign Up"
-        type="submit"
-      />
+      <Button text="Sign Up" type="submit" />
+
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={3000}
+        onClose={handleCloseSuccess}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={handleCloseSuccess} severity="success" variant="filled">
+          Signup successful!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

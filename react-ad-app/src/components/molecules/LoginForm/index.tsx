@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link, Typography, Snackbar, Alert } from "@mui/material";
 
 import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
@@ -14,6 +14,8 @@ const LoginForm = () => {
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -41,28 +43,21 @@ const LoginForm = () => {
     setPasswordError(passwordErrorMessage);
 
     if (!emailErrorMessage && !passwordErrorMessage) {
-      console.log("Login form submitted", { email, password });
+      setShowSuccess(true);
     }
   };
 
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+  };
+
   return (
-    <Box
-      component="form"
-      className="login-form"
-      onSubmit={handleSubmit}
-    >
+    <Box component="form" className="login-form" onSubmit={handleSubmit}>
       <Box>
-        <Typography
-          variant="h4"
-          className="login-form-title"
-        >
+        <Typography variant="h4" className="login-form-title">
           Login to Seeder ✨
         </Typography>
-
-        <Typography
-          variant="body2"
-          color="text.secondary"
-        >
+        <Typography variant="body2" color="text.secondary">
           Enter your email and password to login.
         </Typography>
       </Box>
@@ -90,19 +85,23 @@ const LoginForm = () => {
       />
 
       <Box className="login-form-forgot">
-        <Link
-          href="#"
-          underline="none"
-          color="primary"
-        >
+        <Link href="#" underline="none" color="primary">
           Forgot Password?
         </Link>
       </Box>
 
-      <Button
-        text="Continue"
-        type="submit"
-      />
+      <Button text="Continue" type="submit" />
+
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={3000}
+        onClose={handleCloseSuccess}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={handleCloseSuccess} severity="success" variant="filled">
+          Login successful!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
