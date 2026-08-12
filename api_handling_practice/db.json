@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Rahul Sharma",
+      "email": "rahul.sharma@example.com",
+      "phone": "9876543210",
+      "website": "rahul.dev",
+      "address": {
+        "city": "Guntur"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Priya Nair",
+      "email": "priya.nair@example.com",
+      "phone": "9876543211",
+      "website": "priya.dev",
+      "address": {
+        "city": "Hyderabad"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Arjun Verma",
+      "email": "arjun.verma@example.com",
+      "phone": "9876543212",
+      "website": "arjun.dev",
+      "address": {
+        "city": "Vijayawada"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Sneha Reddy",
+      "email": "sneha.reddy@example.com",
+      "phone": "9876543213",
+      "website": "sneha.dev",
+      "address": {
+        "city": "Bengaluru"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Karthik Iyer",
+      "email": "karthik.iyer@example.com",
+      "phone": "9876543214",
+      "website": "karthik.dev",
+      "address": {
+        "city": "Chennai"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Ananya Das",
+      "email": "ananya.das@example.com",
+      "phone": "9876543215",
+      "website": "ananya.dev",
+      "address": {
+        "city": "Kolkata"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Vikram Rao",
+      "email": "vikram.rao@example.com",
+      "phone": "9876543216",
+      "website": "vikram.dev",
+      "address": {
+        "city": "Pune"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Meera Pillai",
+      "email": "meera.pillai@example.com",
+      "phone": "9876543217",
+      "website": "meera.dev",
+      "address": {
+        "city": "Kochi"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Aditya Singh",
+      "email": "aditya.singh@example.com",
+      "phone": "9876543218",
+      "website": "aditya.dev",
+      "address": {
+        "city": "Delhi"
+      }
+    },
+    {
+      "name": "hi",
+      "email": "hi@example.com",
+      "id": 11
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 3,
+      "title": "Getting started with React"
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "title": "Understanding useEffect"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "title": "Working with async/await"
+    }
+  ]
+}
