@@ -10,6 +10,7 @@ interface ButtonProps {
   startIcon?: ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
+  disabled?: boolean;
 }
 
 const CustomButton = ({
@@ -19,6 +20,7 @@ const CustomButton = ({
   startIcon,
   onClick,
   type = "button",
+  disabled = false,
 }: ButtonProps) => {
   const variantClass =
     variant === "contained" ? "button-contained" : "button-outlined";
@@ -30,6 +32,7 @@ const CustomButton = ({
       fullWidth={fullWidth}
       startIcon={startIcon}
       onClick={onClick}
+      disabled={disabled}
       className={`custom-button ${variantClass}`}
     >
       {text}

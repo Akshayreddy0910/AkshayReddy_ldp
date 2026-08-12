@@ -70,6 +70,11 @@ const theme = createTheme({
           height: 48,
           textTransform: "none",
           fontWeight: 600,
+
+          "&.Mui-disabled": {
+            backgroundColor: "#3A3641",
+            color: "#7A7680",
+          },
         },
       },
     },
@@ -107,6 +112,14 @@ const theme = createTheme({
     },
 
     MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: "#A3A3A3",
+        },
+      },
+    },
+
+    MuiSvgIcon: {
       styleOverrides: {
         root: {
           color: "#A3A3A3",
