@@ -5,7 +5,7 @@ import {
   IconButton,
 } from "@mui/material";
 
-import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import MarkEmailUnreadOutlinedIcon from "@mui/icons-material/MarkEmailUnreadOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
@@ -45,7 +45,7 @@ const InputField = ({
 
   const getStartIcon = () => {
     if (type === "email") {
-      return <MailOutlineOutlinedIcon />;
+      return <MarkEmailUnreadOutlinedIcon />;
     }
 
     if (type === "password") {

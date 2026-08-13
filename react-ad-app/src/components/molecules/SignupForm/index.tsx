@@ -5,6 +5,7 @@ import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
 
 import { validateEmail, validatePassword } from "../../../utils/validators";
+import { signupUser } from "../../../services/authService";
 
 import "./index.css";
 
@@ -17,7 +18,15 @@ const SignupForm = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // button stays disabled until all three fields have something typed in them
+  const isFormFilled =
+    name.trim() !== "" && email.trim() !== "" && password.trim() !== "";
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -43,7 +52,7 @@ const SignupForm = () => {
     setPasswordError(validatePassword(password));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const nameErrorMessage = name ? "" : "Name is required";
@@ -55,7 +64,18 @@ const SignupForm = () => {
     setPasswordError(passwordErrorMessage);
 
     if (!nameErrorMessage && !emailErrorMessage && !passwordErrorMessage) {
-      setShowSuccess(true);
+      setIsSubmitting(true);
+
+      try {
+        const user = await signupUser(name, email, password);
+        console.log("Signup successful", user);
+        setShowSuccess(true);
+      } catch (error) {
+        setErrorMessage(error instanceof Error ? error.message : "Signup failed");
+        setShowError(true);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -63,14 +83,15 @@ const SignupForm = () => {
     setShowSuccess(false);
   };
 
+  const handleCloseError = () => {
+    setShowError(false);
+  };
+
   return (
     <Box component="form" className="signup-form" onSubmit={handleSubmit}>
       <Box>
         <Typography variant="h4" className="signup-form-title">
           Sign Up ✨
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Enter your details to create your account.
         </Typography>
       </Box>
 
@@ -106,7 +127,11 @@ const SignupForm = () => {
         helperText={passwordError}
       />
 
-      <Button text="Sign Up" type="submit" />
+      <Button
+        text={isSubmitting ? "Signing up..." : "Sign Up"}
+        type="submit"
+        disabled={!isFormFilled || isSubmitting}
+      />
 
       <Snackbar
         open={showSuccess}
@@ -116,6 +141,17 @@ const SignupForm = () => {
       >
         <Alert onClose={handleCloseSuccess} severity="success" variant="filled">
           Signup successful!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={showError}
+        autoHideDuration={3000}
+        onClose={handleCloseError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={handleCloseError} severity="error" variant="filled">
+          {errorMessage}
         </Alert>
       </Snackbar>
     </Box>

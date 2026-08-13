@@ -5,6 +5,7 @@ import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
 
 import { validateEmail, validatePassword } from "../../../utils/validators";
+import { loginUser } from "../../../services/authService";
 
 import "./index.css";
 
@@ -15,7 +16,14 @@ const LoginForm = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // button stays disabled until both fields have something typed in them
+  const isFormFilled = email.trim() !== "" && password.trim() !== "";
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -33,7 +41,7 @@ const LoginForm = () => {
     setPasswordError(validatePassword(password));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const emailErrorMessage = validateEmail(email);
@@ -43,12 +51,27 @@ const LoginForm = () => {
     setPasswordError(passwordErrorMessage);
 
     if (!emailErrorMessage && !passwordErrorMessage) {
-      setShowSuccess(true);
+      setIsSubmitting(true);
+
+      try {
+        const user = await loginUser(email, password);
+        console.log("Login successful", user);
+        setShowSuccess(true);
+      } catch (error) {
+        setErrorMessage(error instanceof Error ? error.message : "Login failed");
+        setShowError(true);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
   const handleCloseSuccess = () => {
     setShowSuccess(false);
+  };
+
+  const handleCloseError = () => {
+    setShowError(false);
   };
 
   return (
@@ -90,7 +113,11 @@ const LoginForm = () => {
         </Link>
       </Box>
 
-      <Button text="Continue" type="submit" />
+      <Button
+        text={isSubmitting ? "Logging in..." : "Continue"}
+        type="submit"
+        disabled={!isFormFilled || isSubmitting}
+      />
 
       <Snackbar
         open={showSuccess}
@@ -100,6 +127,17 @@ const LoginForm = () => {
       >
         <Alert onClose={handleCloseSuccess} severity="success" variant="filled">
           Login successful!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={showError}
+        autoHideDuration={3000}
+        onClose={handleCloseError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={handleCloseError} severity="error" variant="filled">
+          {errorMessage}
         </Alert>
       </Snackbar>
     </Box>
