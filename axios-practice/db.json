@@ -1,0 +1,51 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "akshay",
+      "email": "rahul.sharma@example.com",
+      "phone": "9876543210",
+      "city": "Guntur"
+    },
+    {
+      "id": 2,
+      "name": "Priya Nair",
+      "email": "priya.nair@example.com"
+    },
+    {
+      "id": 3,
+      "name": "Arjun Verma",
+      "email": "arjun.verma@example.com"
+    },
+    {
+      "id": 4,
+      "name": "Sneha Reddy",
+      "email": "sneha.reddy@example.com"
+    },
+    {
+      "id": 5,
+      "name": "Karthik Iyer",
+      "email": "karthik.iyer@example.com"
+    },
+    {
+      "id": 6,
+      "name": "Ananya Das",
+      "email": "ananya.das@example.com"
+    },
+    {
+      "id": 7,
+      "name": "Vikram Rao",
+      "email": "vikram.rao@example.com"
+    },
+    {
+      "name": "Sunny",
+      "email": "sunny@example.com",
+      "id": 9
+    },
+    {
+      "name": "kavya",
+      "email": "kavya@example.com",
+      "id": 10
+    }
+  ]
+}
