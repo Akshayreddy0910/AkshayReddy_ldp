@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  background-color: #1b1440;
+  color: #f1eefc;
+}
+
+.header-mark {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.header-link {
+  color: #b6acdd;
+  text-decoration: none;
+  font-size: 0.92rem;
+  padding: 0.35rem 0.1rem;
+  border-bottom: 2px solid transparent;
+}
+
+.header-link:hover {
+  color: #f1eefc;
+}
+
+.header-link-active {
+  color: #c9a7ff;
+  border-bottom: 2px solid #c9a7ff;
+}

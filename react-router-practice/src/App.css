@@ -1,0 +1,118 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 2rem 1.5rem;
+  max-width: 780px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.view h1 {
+  margin-top: 0;
+}
+
+.view-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 360px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #362c66;
+  background-color: #1b1440;
+  color: #f1eefc;
+  font-family: inherit;
+}
+
+.form-field-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form button {
+  align-self: flex-start;
+  padding: 0.5rem 1.1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #7c4dff;
+  color: white;
+  cursor: pointer;
+}
+
+.card-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.card {
+  border: 1px solid #362c66;
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+}
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card h3 {
+  margin: 0 0 0.3rem;
+}
+
+.detail-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.9rem;
+}
+
+.stat-card {
+  border: 1px solid #362c66;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #b6acdd;
+}
