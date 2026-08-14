@@ -13,7 +13,21 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 export default defineConfig({
   plugins: [react()],
   test: {
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      include: ['src/components/atoms/**/*.tsx'],
+      exclude: ['src/components/atoms/**/*.test.tsx', 'src/components/atoms/**/*.stories.tsx']
+    },
     projects: [{
+      extends: true,
+      test: {
+        name: 'unit',
+        environment: 'jsdom',
+        setupFiles: ['./vitest.setup.ts'],
+        include: ['src/**/*.test.tsx']
+      }
+    }, {
       extends: true,
       plugins: [
       // The plugin will run tests for the stories defined in your Storybook config
