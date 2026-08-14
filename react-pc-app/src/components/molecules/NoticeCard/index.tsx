@@ -116,7 +116,9 @@ const styles = {
   },
 
   attachmentIcon: {
-    fontSize: "16px",
+    width: "18px",
+    height: "18px",
+    display: "block",
   },
 
   buttonRow: {
@@ -235,8 +237,13 @@ const NoticeCard = () => {
 
         <div style={styles.attachmentRow}>
           <Icon
-            icon="📎"
-            style={styles.attachmentIcon}
+            icon={
+              <img
+                src="/attachment-paperclip.svg"
+                alt="Attachment"
+                style={styles.attachmentIcon}
+              />
+            }
           />
 
           <Typography
@@ -247,8 +254,13 @@ const NoticeCard = () => {
 
         <div style={styles.attachmentRowSpaced}>
           <Icon
-            icon="📎"
-            style={styles.attachmentIcon}
+            icon={
+              <img
+                src="/attachment-paperclip.svg"
+                alt="Attachment"
+                style={styles.attachmentIcon}
+              />
+            }
           />
 
           <Typography
