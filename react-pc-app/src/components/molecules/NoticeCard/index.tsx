@@ -10,166 +10,241 @@ import Button from "../../atoms/Button";
 import Icon from "../../atoms/Icon";
 import { NOTICE_CARD_TEXT } from "../../../utils/constants";
 
+const styles = {
+  card: {
+    maxWidth: 600,
+    margin: "40px auto",
+    padding: 3,
+  },
+
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    mb: 2,
+  },
+
+  title: {
+    typography: "h5",
+    color: "text.primary",
+  },
+
+  dividerTop: {
+    mb: 2,
+  },
+
+  secondaryText: {
+    typography: "body2",
+    color: "text.secondary",
+  },
+
+  smallSpacing: {
+    mt: 0.5,
+  },
+
+  subjectContainer: {
+    mt: 0.5,
+    mb: 2,
+  },
+
+  subject: {
+    typography: "body2",
+    fontWeight: "bold",
+    color: "text.primary",
+  },
+
+  warningBox: {
+    backgroundColor: "warning.light",
+    borderRadius: 2,
+    p: 2,
+    mb: 2,
+  },
+
+  warningText: {
+    typography: "caption",
+    color: "secondary.main",
+  },
+
+  warningSecondLine: {
+    mt: 0.5,
+  },
+
+  greeting: {
+    typography: "body1",
+    color: "text.secondary",
+  },
+
+  bodyParagraph: {
+    mt: 1.5,
+  },
+
+  bodyText: {
+    typography: "body1",
+    color: "text.secondary",
+  },
+
+  chargeItem: {
+    mt: 1.5,
+  },
+
+  boldBodyText: {
+    typography: "body1",
+    fontWeight: "bold",
+    color: "text.primary",
+  },
+
+  disputeParagraph: {
+    mt: 1.5,
+  },
+
+  signOff: {
+    mt: 2,
+  },
+
+  attachments: {
+    mt: 2.5,
+  },
+
+  attachmentsHeading: {
+    typography: "body1",
+    fontWeight: "bold",
+    color: "text.primary",
+  },
+
+  attachmentRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 1,
+    mt: 1,
+  },
+
+  secondAttachmentRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 1,
+    mt: 0.75,
+  },
+
+  attachmentText: {
+    typography: "caption",
+    color: "text.secondary",
+  },
+
+  dividerBottom: {
+    my: 2.5,
+  },
+
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+
+  submitButton: {
+    backgroundColor: "primary.main",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "primary.dark",
+    },
+  },
+};
+
 const NoticeCard = () => {
   const handleSubmit = () => {
     alert(NOTICE_CARD_TEXT.submitAlertMessage);
   };
 
   return (
-    <Card sx={{ maxWidth: 600, margin: "40px auto", padding: 3 }}>
+    <Card sx={styles.card}>
       <CardContent>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            mb: 2,
-          }}
-        >
+        <Box sx={styles.header}>
           <Typography
             text={NOTICE_CARD_TEXT.title}
-            sx={{
-              typography: "h5",
-              color: "text.primary",
-            }}
+            sx={styles.title}
           />
 
           <Icon icon={CloseIcon} color="action" />
         </Box>
 
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={styles.dividerTop} />
 
         <Typography
           text={NOTICE_CARD_TEXT.from}
-          sx={{
-            typography: "body2",
-            color: "text.secondary",
-          }}
+          sx={styles.secondaryText}
         />
 
-        <Box sx={{ mt: 0.5 }}>
+        <Box sx={styles.smallSpacing}>
           <Typography
             text={NOTICE_CARD_TEXT.to}
-            sx={{
-              typography: "body2",
-              color: "text.secondary",
-            }}
+            sx={styles.secondaryText}
           />
         </Box>
 
-        <Box sx={{ mt: 0.5, mb: 2 }}>
+        <Box sx={styles.subjectContainer}>
           <Typography
             text={NOTICE_CARD_TEXT.subject}
-            sx={{
-              typography: "body2",
-              fontWeight: "bold",
-              color: "text.primary",
-            }}
+            sx={styles.subject}
           />
         </Box>
 
-        <Box
-          sx={{
-            backgroundColor: "warning.light",
-            borderRadius: 2,
-            p: 2,
-            mb: 2,
-          }}
-        >
+        <Box sx={styles.warningBox}>
           <Typography
             text={NOTICE_CARD_TEXT.warningLine1}
-            sx={{
-              typography: "caption",
-              color: "secondary.main",
-            }}
+            sx={styles.warningText}
           />
 
-          <Box sx={{ mt: 0.5 }}>
+          <Box sx={styles.warningSecondLine}>
             <Typography
               text={NOTICE_CARD_TEXT.warningLine2}
-              sx={{
-                typography: "caption",
-                color: "secondary.main",
-              }}
+              sx={styles.warningText}
             />
           </Box>
         </Box>
 
         <Typography
           text={NOTICE_CARD_TEXT.greeting}
-          sx={{
-            typography: "body1",
-            color: "text.secondary",
-          }}
+          sx={styles.greeting}
         />
 
-        <Box sx={{ mt: 1.5 }}>
+        <Box sx={styles.bodyParagraph}>
           <Typography
             text={NOTICE_CARD_TEXT.bodyParagraph}
-            sx={{
-              typography: "body1",
-              color: "text.secondary",
-            }}
+            sx={styles.bodyText}
           />
         </Box>
 
-        <Box sx={{ mt: 1.5 }}>
+        <Box sx={styles.chargeItem}>
           <Typography
             text={NOTICE_CARD_TEXT.chargeItem}
-            sx={{
-              typography: "body1",
-              fontWeight: "bold",
-              color: "text.primary",
-            }}
+            sx={styles.boldBodyText}
           />
         </Box>
 
-        <Box sx={{ mt: 1.5 }}>
+        <Box sx={styles.disputeParagraph}>
           <Typography
             text={NOTICE_CARD_TEXT.disputeParagraph}
-            sx={{
-              typography: "body1",
-              color: "text.secondary",
-            }}
+            sx={styles.bodyText}
           />
         </Box>
 
-        <Box sx={{ mt: 2 }}>
+        <Box sx={styles.signOff}>
           <Typography
             text={NOTICE_CARD_TEXT.signOffLine1}
-            sx={{
-              typography: "body1",
-              color: "text.secondary",
-            }}
+            sx={styles.bodyText}
           />
 
           <Typography
             text={NOTICE_CARD_TEXT.signOffLine2}
-            sx={{
-              typography: "body1",
-              color: "text.secondary",
-            }}
+            sx={styles.bodyText}
           />
         </Box>
 
-        <Box sx={{ mt: 2.5 }}>
+        <Box sx={styles.attachments}>
           <Typography
             text={NOTICE_CARD_TEXT.attachmentsHeading}
-            sx={{
-              typography: "body1",
-              fontWeight: "bold",
-              color: "text.primary",
-            }}
+            sx={styles.attachmentsHeading}
           />
 
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              mt: 1,
-            }}
-          >
+          <Box sx={styles.attachmentRow}>
             <Icon
               icon={AttachFileIcon}
               color="action"
@@ -178,21 +253,11 @@ const NoticeCard = () => {
 
             <Typography
               text={NOTICE_CARD_TEXT.attachment1}
-              sx={{
-                typography: "caption",
-                color: "text.secondary",
-              }}
+              sx={styles.attachmentText}
             />
           </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              mt: 0.75,
-            }}
-          >
+          <Box sx={styles.secondAttachmentRow}>
             <Icon
               icon={AttachFileIcon}
               color="action"
@@ -201,32 +266,18 @@ const NoticeCard = () => {
 
             <Typography
               text={NOTICE_CARD_TEXT.attachment2}
-              sx={{
-                typography: "caption",
-                color: "text.secondary",
-              }}
+              sx={styles.attachmentText}
             />
           </Box>
         </Box>
 
-        <Divider sx={{ my: 2.5 }} />
+        <Divider sx={styles.dividerBottom} />
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
+        <Box sx={styles.buttonContainer}>
           <Button
             label={NOTICE_CARD_TEXT.submitButton}
             onClick={handleSubmit}
-            sx={{
-              backgroundColor: "primary.main",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "primary.dark",
-              },
-            }}
+            sx={styles.submitButton}
           />
         </Box>
       </CardContent>
