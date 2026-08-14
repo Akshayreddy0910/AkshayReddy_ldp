@@ -1,12 +1,13 @@
-import type { CSSProperties } from "react";
+import MuiTypography from "@mui/material/Typography";
+import type { SxProps, Theme } from "@mui/material/styles";
 
 interface TypographyProps {
   text: string;
-  style?: CSSProperties;
+  sx?: SxProps<Theme>;
 }
 
-const Typography = ({ text, style }: TypographyProps) => {
-  return <p style={style}>{text}</p>;
+const Typography = ({ text, sx }: TypographyProps) => {
+  return <MuiTypography sx={sx}>{text}</MuiTypography>;
 };
 
 export default Typography;

@@ -1,3 +1,10 @@
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Divider from "@mui/material/Divider";
+import CloseIcon from "@mui/icons-material/Close";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+
 import Typography from "../../atoms/Typography";
 import Button from "../../atoms/Button";
 import Icon from "../../atoms/Icon";
@@ -5,135 +12,139 @@ import { NOTICE_CARD_TEXT } from "../../../utils/constants";
 
 const styles = {
   card: {
-    maxWidth: "600px",
+    maxWidth: 600,
     margin: "40px auto",
-    backgroundColor: "white",
-    borderRadius: "10px",
-    padding: "24px",
-    boxShadow: "0 2px 10px gray",
+    padding: 3,
   },
 
-  title: {
-    margin: 0,
-    fontSize: "20px",
-    fontWeight: "bold",
-    color: "darkslategray",
-  },
-
-  label: {
-    margin: 0,
-    fontSize: "14px",
-    color: "darkslategray",
-    textAlign: "left" as const,
-  },
-
-  body: {
-    margin: 0,
-    fontSize: "14px",
-    color: "darkslategray",
-    textAlign: "left" as const,
-  },
-
-  small: {
-    margin: 0,
-    fontSize: "12px",
-    color: "darkslategray",
-    textAlign: "left" as const,
-  },
-
-  bold: {
-    margin: 0,
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: "darkslategray",
-    textAlign: "left" as const,
-  },
-
-  headerRow: {
+  header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "16px",
+    mb: 2,
   },
 
-  closeIcon: {
-    fontSize: "20px",
-    color: "dimgray",
+  title: {
+    typography: "h5",
+    color: "text.primary",
   },
 
-  divider: {
-    border: "none",
-    borderTop: "1px solid lightgray",
-    margin: "0 0 16px 0",
+  dividerTop: {
+    mb: 2,
   },
 
-  dividerBottom: {
-    border: "none",
-    borderTop: "1px solid lightgray",
-    margin: "20px 0",
+  secondaryText: {
+    typography: "body2",
+    color: "text.secondary",
   },
 
-  spacingSmall: {
-    marginTop: "6px",
+  smallSpacing: {
+    mt: 0.5,
   },
 
-  spacingSmallBottom: {
-    marginTop: "6px",
-    marginBottom: "16px",
+  subjectContainer: {
+    mt: 0.5,
+    mb: 2,
   },
 
-  spacingMedium: {
-    marginTop: "12px",
-  },
-
-  spacingLarge: {
-    marginTop: "16px",
-  },
-
-  spacingXLarge: {
-    marginTop: "20px",
+  subject: {
+    typography: "body2",
+    fontWeight: "bold",
+    color: "text.primary",
   },
 
   warningBox: {
-    backgroundColor: "mistyrose",
-    borderRadius: "8px",
-    padding: "12px 16px",
-    marginBottom: "16px",
+    backgroundColor: "warning.light",
+    borderRadius: 2,
+    p: 2,
+    mb: 2,
+  },
+
+  warningText: {
+    typography: "caption",
+    color: "secondary.main",
+  },
+
+  warningSecondLine: {
+    mt: 0.5,
+  },
+
+  greeting: {
+    typography: "body1",
+    color: "text.secondary",
+  },
+
+  bodyParagraph: {
+    mt: 1.5,
+  },
+
+  bodyText: {
+    typography: "body1",
+    color: "text.secondary",
+  },
+
+  chargeItem: {
+    mt: 1.5,
+  },
+
+  boldBodyText: {
+    typography: "body1",
+    fontWeight: "bold",
+    color: "text.primary",
+  },
+
+  disputeParagraph: {
+    mt: 1.5,
+  },
+
+  signOff: {
+    mt: 2,
+  },
+
+  attachments: {
+    mt: 2.5,
+  },
+
+  attachmentsHeading: {
+    typography: "body1",
+    fontWeight: "bold",
+    color: "text.primary",
   },
 
   attachmentRow: {
     display: "flex",
     alignItems: "center",
-    gap: "6px",
-    marginTop: "8px",
+    gap: 1,
+    mt: 1,
   },
 
-  attachmentRowSpaced: {
+  secondAttachmentRow: {
     display: "flex",
     alignItems: "center",
-    gap: "6px",
-    marginTop: "6px",
+    gap: 1,
+    mt: 0.75,
   },
 
-  attachmentIcon: {
-    width: "18px",
-    height: "18px",
-    display: "block",
+  attachmentText: {
+    typography: "caption",
+    color: "text.secondary",
   },
 
-  buttonRow: {
+  dividerBottom: {
+    my: 2.5,
+  },
+
+  buttonContainer: {
     display: "flex",
     justifyContent: "flex-end",
   },
 
-  button: {
-    backgroundColor: "darkviolet",
+  submitButton: {
+    backgroundColor: "primary.main",
     color: "white",
-    border: "none",
-    borderRadius: "6px",
-    padding: "10px 20px",
-    fontSize: "14px",
-    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "primary.dark",
+    },
   },
 };
 
@@ -143,143 +154,134 @@ const NoticeCard = () => {
   };
 
   return (
-    <div style={styles.card}>
-      <div style={styles.headerRow}>
-        <Typography
-          text={NOTICE_CARD_TEXT.title}
-          style={styles.title}
-        />
-
-        <Icon
-          icon="×"
-          style={styles.closeIcon}
-        />
-      </div>
-
-      <hr style={styles.divider} />
-
-      <Typography
-        text={NOTICE_CARD_TEXT.from}
-        style={styles.label}
-      />
-
-      <div style={styles.spacingSmall}>
-        <Typography
-          text={NOTICE_CARD_TEXT.to}
-          style={styles.label}
-        />
-      </div>
-
-      <div style={styles.spacingSmallBottom}>
-        <Typography
-          text={NOTICE_CARD_TEXT.subject}
-          style={styles.bold}
-        />
-      </div>
-
-      <div style={styles.warningBox}>
-        <Typography
-          text={NOTICE_CARD_TEXT.warningLine1}
-          style={styles.small}
-        />
-
-        <div style={styles.spacingSmall}>
+    <Card sx={styles.card}>
+      <CardContent>
+        <Box sx={styles.header}>
           <Typography
-            text={NOTICE_CARD_TEXT.warningLine2}
-            style={styles.small}
+            text={NOTICE_CARD_TEXT.title}
+            sx={styles.title}
           />
-        </div>
-      </div>
 
-      <Typography
-        text={NOTICE_CARD_TEXT.greeting}
-        style={styles.body}
-      />
+          <Icon icon={CloseIcon} color="action" />
+        </Box>
 
-      <div style={styles.spacingMedium}>
-        <Typography
-          text={NOTICE_CARD_TEXT.bodyParagraph}
-          style={styles.body}
-        />
-      </div>
-
-      <div style={styles.spacingMedium}>
-        <Typography
-          text={NOTICE_CARD_TEXT.chargeItem}
-          style={styles.bold}
-        />
-      </div>
-
-      <div style={styles.spacingMedium}>
-        <Typography
-          text={NOTICE_CARD_TEXT.disputeParagraph}
-          style={styles.body}
-        />
-      </div>
-
-      <div style={styles.spacingLarge}>
-        <Typography
-          text={NOTICE_CARD_TEXT.signOffLine1}
-          style={styles.body}
-        />
+        <Divider sx={styles.dividerTop} />
 
         <Typography
-          text={NOTICE_CARD_TEXT.signOffLine2}
-          style={styles.body}
+          text={NOTICE_CARD_TEXT.from}
+          sx={styles.secondaryText}
         />
-      </div>
 
-      <div style={styles.spacingXLarge}>
+        <Box sx={styles.smallSpacing}>
+          <Typography
+            text={NOTICE_CARD_TEXT.to}
+            sx={styles.secondaryText}
+          />
+        </Box>
+
+        <Box sx={styles.subjectContainer}>
+          <Typography
+            text={NOTICE_CARD_TEXT.subject}
+            sx={styles.subject}
+          />
+        </Box>
+
+        <Box sx={styles.warningBox}>
+          <Typography
+            text={NOTICE_CARD_TEXT.warningLine1}
+            sx={styles.warningText}
+          />
+
+          <Box sx={styles.warningSecondLine}>
+            <Typography
+              text={NOTICE_CARD_TEXT.warningLine2}
+              sx={styles.warningText}
+            />
+          </Box>
+        </Box>
+
         <Typography
-          text={NOTICE_CARD_TEXT.attachmentsHeading}
-          style={styles.bold}
+          text={NOTICE_CARD_TEXT.greeting}
+          sx={styles.greeting}
         />
 
-        <div style={styles.attachmentRow}>
-          <Icon
-            icon={
-              <img
-                src="/attachment-paperclip.svg"
-                alt="Attachment"
-                style={styles.attachmentIcon}
-              />
-            }
+        <Box sx={styles.bodyParagraph}>
+          <Typography
+            text={NOTICE_CARD_TEXT.bodyParagraph}
+            sx={styles.bodyText}
+          />
+        </Box>
+
+        <Box sx={styles.chargeItem}>
+          <Typography
+            text={NOTICE_CARD_TEXT.chargeItem}
+            sx={styles.boldBodyText}
+          />
+        </Box>
+
+        <Box sx={styles.disputeParagraph}>
+          <Typography
+            text={NOTICE_CARD_TEXT.disputeParagraph}
+            sx={styles.bodyText}
+          />
+        </Box>
+
+        <Box sx={styles.signOff}>
+          <Typography
+            text={NOTICE_CARD_TEXT.signOffLine1}
+            sx={styles.bodyText}
           />
 
           <Typography
-            text={NOTICE_CARD_TEXT.attachment1}
-            style={styles.small}
+            text={NOTICE_CARD_TEXT.signOffLine2}
+            sx={styles.bodyText}
           />
-        </div>
+        </Box>
 
-        <div style={styles.attachmentRowSpaced}>
-          <Icon
-            icon={
-              <img
-                src="/attachment-paperclip.svg"
-                alt="Attachment"
-                style={styles.attachmentIcon}
-              />
-            }
-          />
-
+        <Box sx={styles.attachments}>
           <Typography
-            text={NOTICE_CARD_TEXT.attachment2}
-            style={styles.small}
+            text={NOTICE_CARD_TEXT.attachmentsHeading}
+            sx={styles.attachmentsHeading}
           />
-        </div>
-      </div>
 
-      <hr style={styles.dividerBottom} />
+          <Box sx={styles.attachmentRow}>
+            <Icon
+              icon={AttachFileIcon}
+              color="action"
+              fontSize="small"
+            />
 
-      <div style={styles.buttonRow}>
-        <Button
-          label={NOTICE_CARD_TEXT.submitButton}
-          onClick={handleSubmit}
-          style={styles.button}
-        />
-      </div>
-    </div>
+            <Typography
+              text={NOTICE_CARD_TEXT.attachment1}
+              sx={styles.attachmentText}
+            />
+          </Box>
+
+          <Box sx={styles.secondAttachmentRow}>
+            <Icon
+              icon={AttachFileIcon}
+              color="action"
+              fontSize="small"
+            />
+
+            <Typography
+              text={NOTICE_CARD_TEXT.attachment2}
+              sx={styles.attachmentText}
+            />
+          </Box>
+        </Box>
+
+        <Divider sx={styles.dividerBottom} />
+
+        <Box sx={styles.buttonContainer}>
+          <Button
+            label={NOTICE_CARD_TEXT.submitButton}
+            onClick={handleSubmit}
+            sx={styles.submitButton}
+          />
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 

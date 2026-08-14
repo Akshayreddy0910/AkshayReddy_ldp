@@ -1,12 +1,14 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ElementType } from "react";
+import type { SvgIconProps } from "@mui/material/SvgIcon";
 
 interface IconProps {
-  icon: ReactNode;
-  style?: CSSProperties;
+  icon: ElementType<SvgIconProps>;
+  color?: SvgIconProps["color"];
+  fontSize?: SvgIconProps["fontSize"];
 }
 
-const Icon = ({ icon, style }: IconProps) => {
-  return <span style={style}>{icon}</span>;
+const Icon = ({ icon: IconComponent, color, fontSize }: IconProps) => {
+  return <IconComponent color={color} fontSize={fontSize} />;
 };
 
 export default Icon;
