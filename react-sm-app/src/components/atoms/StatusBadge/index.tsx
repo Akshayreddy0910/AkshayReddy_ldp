@@ -3,6 +3,7 @@ import type { ChipProps } from "@mui/material/Chip";
 
 interface StatusBadgeProps {
   status: string;
+  color?: ChipProps["color"];
 }
 
 const STATUS_COLOR_MAP: Record<string, ChipProps["color"]> = {
@@ -10,12 +11,12 @@ const STATUS_COLOR_MAP: Record<string, ChipProps["color"]> = {
   CONSIDER: "warning",
 };
 
-const StatusBadge = ({ status }: StatusBadgeProps) => {
+const StatusBadge = ({ status, color }: StatusBadgeProps) => {
   return (
     <Chip
       label={status}
       size="small"
-      color={STATUS_COLOR_MAP[status] ?? "default"}
+      color={color ?? STATUS_COLOR_MAP[status] ?? "default"}
     />
   );
 };
