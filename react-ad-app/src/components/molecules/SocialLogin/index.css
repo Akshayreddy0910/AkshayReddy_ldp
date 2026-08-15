@@ -1,0 +1,35 @@
+.social-login {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.social-login-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.social-login-button {
+  flex: 1;
+  height: 74px;
+  background-color: #25252b;
+  border-radius: 10px;
+  color: #fff;
+  text-transform: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.social-login-button:hover {
+  background-color: #2d2d35;
+}
+
+.social-login-link {
+  color: #6c5dd3;
+  text-decoration: none;
+  font-weight: 600;
+}
