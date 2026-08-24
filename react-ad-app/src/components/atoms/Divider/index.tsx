@@ -1,20 +1,23 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Stack, styled, Typography } from "@mui/material";
 
-import "./index.css";
+const DividerLine = styled(Divider)({
+  flex: 1,
+});
 
 const CustomDivider = () => {
   return (
     <Stack
       direction="row"
-      className="custom-divider"
+      alignItems="center"
+      gap={2}
     >
-      <Divider className="custom-divider-line" />
+      <DividerLine />
 
       <Typography variant="body2" color="text.secondary">
         Or
       </Typography>
 
-      <Divider className="custom-divider-line" />
+      <DividerLine />
     </Stack>
   );
 };
