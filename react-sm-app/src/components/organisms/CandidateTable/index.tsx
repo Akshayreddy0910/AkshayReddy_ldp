@@ -34,6 +34,12 @@ import {
 import { styles } from "./styles";
 import { useCandidates } from "./useCandidates";
 
+const getStatusColor = (status: string) => {
+  if (status === "CLEAR") return "success";
+  if (status === "CONSIDER") return "warning";
+  return "default";
+};
+
 const CandidateTable = () => {
   const { searchQuery, setSearchQuery, filteredCandidates } = useCandidates();
 
@@ -82,7 +88,10 @@ const CandidateTable = () => {
                 <TableCell>{candidate.adjudication}</TableCell>
 
                 <TableCell>
-                  <StatusBadge status={candidate.status} />
+                  <StatusBadge
+                    status={candidate.status}
+                    color={getStatusColor(candidate.status)}
+                  />
                 </TableCell>
 
                 <TableCell>{candidate.location}</TableCell>
