@@ -1,8 +1,6 @@
 import { Button } from "@mui/material";
 import type { ReactNode } from "react";
 
-import "./index.css";
-
 interface ButtonProps {
   text: string;
   variant?: "contained" | "outlined";
@@ -20,9 +18,6 @@ const CustomButton = ({
   onClick,
   type = "button",
 }: ButtonProps) => {
-  const variantClass =
-    variant === "contained" ? "button-contained" : "button-outlined";
-
   return (
     <Button
       type={type}
@@ -30,7 +25,6 @@ const CustomButton = ({
       fullWidth={fullWidth}
       startIcon={startIcon}
       onClick={onClick}
-      className={`custom-button ${variantClass}`}
     >
       {text}
     </Button>

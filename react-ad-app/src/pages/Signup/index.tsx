@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import SignupForm from "../../components/molecules/SignupForm";
+import SignupForm from "../../components/organisms/SignupForm";
 import SocialLogin from "../../components/molecules/SocialLogin";
 
 import backgroundImage from "../../assets/images/signup-image.png";
