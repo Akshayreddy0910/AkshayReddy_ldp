@@ -71,6 +71,18 @@ const theme = createTheme({
           textTransform: "none",
           fontWeight: 600,
         },
+        contained: {
+          color: "#FFFFFF",
+        },
+        outlined: {
+          color: "#FFFFFF",
+          borderColor: "#3A3641",
+
+          "&:hover": {
+            backgroundColor: "#2A272E",
+            borderColor: "#6C5DD3",
+          },
+        },
       },
     },
 

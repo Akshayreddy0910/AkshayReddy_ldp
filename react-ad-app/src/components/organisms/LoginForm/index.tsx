@@ -4,18 +4,19 @@ import { Box, Link, Typography, Snackbar, Alert } from "@mui/material";
 import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
 
+import { LOGIN_FORM_TEXT } from "../../../utils/constants";
 import { validateEmail, validatePassword } from "../../../utils/validators";
 
 import "./index.css";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
 
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -55,16 +56,17 @@ const LoginForm = () => {
     <Box component="form" className="login-form" onSubmit={handleSubmit}>
       <Box>
         <Typography variant="h4" className="login-form-title">
-          Login to Seeder ✨
+          {LOGIN_FORM_TEXT.title}
         </Typography>
+
         <Typography variant="body2" color="text.secondary">
-          Enter your email and password to login.
+          {LOGIN_FORM_TEXT.description}
         </Typography>
       </Box>
 
       <InputField
         name="email"
-        placeholder="Enter your email"
+        placeholder={LOGIN_FORM_TEXT.emailPlaceholder}
         type="email"
         value={email}
         onChange={handleEmailChange}
@@ -75,7 +77,7 @@ const LoginForm = () => {
 
       <InputField
         name="password"
-        placeholder="Enter your password"
+        placeholder={LOGIN_FORM_TEXT.passwordPlaceholder}
         type="password"
         value={password}
         onChange={handlePasswordChange}
@@ -86,11 +88,14 @@ const LoginForm = () => {
 
       <Box className="login-form-forgot">
         <Link href="#" underline="none" color="primary">
-          Forgot Password?
+          {LOGIN_FORM_TEXT.forgotPassword}
         </Link>
       </Box>
 
-      <Button text="Continue" type="submit" />
+      <Button
+        text={LOGIN_FORM_TEXT.continueButton}
+        type="submit"
+      />
 
       <Snackbar
         open={showSuccess}
@@ -98,8 +103,12 @@ const LoginForm = () => {
         onClose={handleCloseSuccess}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseSuccess} severity="success" variant="filled">
-          Login successful!
+        <Alert
+          onClose={handleCloseSuccess}
+          severity="success"
+          variant="filled"
+        >
+          {LOGIN_FORM_TEXT.successMessage}
         </Alert>
       </Snackbar>
     </Box>

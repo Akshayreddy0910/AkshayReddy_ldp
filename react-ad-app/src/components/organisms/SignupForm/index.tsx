@@ -4,20 +4,24 @@ import { Box, Typography, Snackbar, Alert } from "@mui/material";
 import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
 
-import { validateEmail, validatePassword } from "../../../utils/validators";
+import { SIGNUP_FORM_TEXT } from "../../../utils/constants";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../../utils/validators";
 
 import "./index.css";
 
 const SignupForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [nameError, setNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
 
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -32,7 +36,7 @@ const SignupForm = () => {
   };
 
   const handleNameBlur = () => {
-    setNameError(name ? "" : "Name is required");
+    setNameError(name ? "" : SIGNUP_FORM_TEXT.nameRequired);
   };
 
   const handleEmailBlur = () => {
@@ -46,7 +50,7 @@ const SignupForm = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const nameErrorMessage = name ? "" : "Name is required";
+    const nameErrorMessage = name ? "" : SIGNUP_FORM_TEXT.nameRequired;
     const emailErrorMessage = validateEmail(email);
     const passwordErrorMessage = validatePassword(password);
 
@@ -67,16 +71,17 @@ const SignupForm = () => {
     <Box component="form" className="signup-form" onSubmit={handleSubmit}>
       <Box>
         <Typography variant="h4" className="signup-form-title">
-          Sign Up ✨
+          {SIGNUP_FORM_TEXT.title}
         </Typography>
+
         <Typography variant="body2" color="text.secondary">
-          Enter your details to create your account.
+          {SIGNUP_FORM_TEXT.description}
         </Typography>
       </Box>
 
       <InputField
         name="name"
-        placeholder="Your Name"
+        placeholder={SIGNUP_FORM_TEXT.namePlaceholder}
         value={name}
         onChange={handleNameChange}
         onBlur={handleNameBlur}
@@ -86,7 +91,7 @@ const SignupForm = () => {
 
       <InputField
         name="email"
-        placeholder="Email Address"
+        placeholder={SIGNUP_FORM_TEXT.emailPlaceholder}
         type="email"
         value={email}
         onChange={handleEmailChange}
@@ -97,7 +102,7 @@ const SignupForm = () => {
 
       <InputField
         name="password"
-        placeholder="Password"
+        placeholder={SIGNUP_FORM_TEXT.passwordPlaceholder}
         type="password"
         value={password}
         onChange={handlePasswordChange}
@@ -106,7 +111,10 @@ const SignupForm = () => {
         helperText={passwordError}
       />
 
-      <Button text="Sign Up" type="submit" />
+      <Button
+        text={SIGNUP_FORM_TEXT.signUpButton}
+        type="submit"
+      />
 
       <Snackbar
         open={showSuccess}
@@ -114,8 +122,12 @@ const SignupForm = () => {
         onClose={handleCloseSuccess}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseSuccess} severity="success" variant="filled">
-          Signup successful!
+        <Alert
+          onClose={handleCloseSuccess}
+          severity="success"
+          variant="filled"
+        >
+          {SIGNUP_FORM_TEXT.successMessage}
         </Alert>
       </Snackbar>
     </Box>
