@@ -2,6 +2,8 @@ import Divider from "../../atoms/Divider";
 import Icon from "../../atoms/Icon";
 import Button from "../../atoms/Button";
 
+import { SOCIAL_LOGIN_TEXT } from "./constants";
+
 interface SocialOption {
   icon: string;
   label: string;
@@ -28,7 +30,7 @@ const SocialLogin = ({
 }: SocialLoginProps) => {
   return (
     <div className={["social-login", className].filter(Boolean).join(" ")}>
-      <Divider label="Or" />
+      <Divider label={SOCIAL_LOGIN_TEXT.DIVIDER_LABEL} />
 
       <div className="social-login__buttons">
         {options.map((option) => (
@@ -37,7 +39,14 @@ const SocialLogin = ({
             label={option.label}
             fullWidth={false}
             variant="secondary"
-            startIcon={<Icon src={option.icon} alt={option.label} width={22} height={22} />}
+            startIcon={
+              <Icon
+                src={option.icon}
+                alt={option.label}
+                width={22}
+                height={22}
+              />
+            }
             onClick={() => onSocialClick?.(option.label)}
           />
         ))}
@@ -46,16 +55,16 @@ const SocialLogin = ({
       <p className="social-login__footer">
         {showSignupLink ? (
           <>
-            Don't have an account?{" "}
+            {SOCIAL_LOGIN_TEXT.DONT_HAVE_ACCOUNT}{" "}
             <a href={signupHref} onClick={onLinkClick}>
-              Sign Up
+              {SOCIAL_LOGIN_TEXT.SIGN_UP}
             </a>
           </>
         ) : (
           <>
-            Already have an account?{" "}
+            {SOCIAL_LOGIN_TEXT.ALREADY_HAVE_ACCOUNT}{" "}
             <a href={loginHref} onClick={onLinkClick}>
-              Login
+              {SOCIAL_LOGIN_TEXT.LOGIN}
             </a>
           </>
         )}
