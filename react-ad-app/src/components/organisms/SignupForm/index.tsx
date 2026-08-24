@@ -4,44 +4,55 @@ import { Box, Typography, Snackbar, Alert } from "@mui/material";
 import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
 
-import { validateEmail, validatePassword } from "../../../utils/validators";
+import { SIGNUP_FORM_TEXT } from "../../../utils/constants";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../../utils/validators";
+
 import { signupUser } from "../../../services/authService";
 
 import "./index.css";
 
 const SignupForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [nameError, setNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  // button stays disabled until all three fields have something typed in them
   const isFormFilled =
-    name.trim() !== "" && email.trim() !== "" && password.trim() !== "";
+    name.trim() !== "" &&
+    email.trim() !== "" &&
+    password.trim() !== "";
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setName(event.target.value);
   };
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setPassword(event.target.value);
   };
 
   const handleNameBlur = () => {
-    setNameError(name ? "" : "Name is required");
+    setNameError(name ? "" : SIGNUP_FORM_TEXT.nameRequired);
   };
 
   const handleEmailBlur = () => {
@@ -55,7 +66,10 @@ const SignupForm = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const nameErrorMessage = name ? "" : "Name is required";
+    const nameErrorMessage = name
+      ? ""
+      : SIGNUP_FORM_TEXT.nameRequired;
+
     const emailErrorMessage = validateEmail(email);
     const passwordErrorMessage = validatePassword(password);
 
@@ -63,7 +77,11 @@ const SignupForm = () => {
     setEmailError(emailErrorMessage);
     setPasswordError(passwordErrorMessage);
 
-    if (!nameErrorMessage && !emailErrorMessage && !passwordErrorMessage) {
+    if (
+      !nameErrorMessage &&
+      !emailErrorMessage &&
+      !passwordErrorMessage
+    ) {
       setIsSubmitting(true);
 
       try {
@@ -71,7 +89,9 @@ const SignupForm = () => {
         console.log("Signup successful", user);
         setShowSuccess(true);
       } catch (error) {
-        setErrorMessage(error instanceof Error ? error.message : "Signup failed");
+        setErrorMessage(
+          error instanceof Error ? error.message : "Signup failed"
+        );
         setShowError(true);
       } finally {
         setIsSubmitting(false);
@@ -88,16 +108,30 @@ const SignupForm = () => {
   };
 
   return (
-    <Box component="form" className="signup-form" onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      className="signup-form"
+      onSubmit={handleSubmit}
+    >
       <Box>
-        <Typography variant="h4" className="signup-form-title">
-          Sign Up ✨
+        <Typography
+          variant="h4"
+          className="signup-form-title"
+        >
+          {SIGNUP_FORM_TEXT.title}
+        </Typography>
+
+        <Typography
+          variant="body2"
+          color="text.secondary"
+        >
+          {SIGNUP_FORM_TEXT.description}
         </Typography>
       </Box>
 
       <InputField
         name="name"
-        placeholder="Your Name"
+        placeholder={SIGNUP_FORM_TEXT.namePlaceholder}
         value={name}
         onChange={handleNameChange}
         onBlur={handleNameBlur}
@@ -107,7 +141,7 @@ const SignupForm = () => {
 
       <InputField
         name="email"
-        placeholder="Email Address"
+        placeholder={SIGNUP_FORM_TEXT.emailPlaceholder}
         type="email"
         value={email}
         onChange={handleEmailChange}
@@ -118,7 +152,7 @@ const SignupForm = () => {
 
       <InputField
         name="password"
-        placeholder="Password"
+        placeholder={SIGNUP_FORM_TEXT.passwordPlaceholder}
         type="password"
         value={password}
         onChange={handlePasswordChange}
@@ -128,7 +162,7 @@ const SignupForm = () => {
       />
 
       <Button
-        text={isSubmitting ? "Signing up..." : "Sign Up"}
+        text={SIGNUP_FORM_TEXT.signUpButton}
         type="submit"
         disabled={!isFormFilled || isSubmitting}
       />
@@ -137,10 +171,17 @@ const SignupForm = () => {
         open={showSuccess}
         autoHideDuration={3000}
         onClose={handleCloseSuccess}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
       >
-        <Alert onClose={handleCloseSuccess} severity="success" variant="filled">
-          Signup successful!
+        <Alert
+          onClose={handleCloseSuccess}
+          severity="success"
+          variant="filled"
+        >
+          {SIGNUP_FORM_TEXT.successMessage}
         </Alert>
       </Snackbar>
 
@@ -148,9 +189,16 @@ const SignupForm = () => {
         open={showError}
         autoHideDuration={3000}
         onClose={handleCloseError}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
       >
-        <Alert onClose={handleCloseError} severity="error" variant="filled">
+        <Alert
+          onClose={handleCloseError}
+          severity="error"
+          variant="filled"
+        >
           {errorMessage}
         </Alert>
       </Snackbar>

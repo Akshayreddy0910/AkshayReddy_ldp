@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 
-import LoginForm from "../../components/molecules/LoginForm";
+import Icon from "../../components/atoms/Icon";
+import LoginForm from "../../components/organisms/LoginForm";
 import SocialLogin from "../../components/molecules/SocialLogin";
 
 import backgroundImage from "../../assets/images/login-image.png";
@@ -13,10 +14,11 @@ const Login = () => {
     <Box className="login-page">
       <Box className="login-page-left">
         <Box className="login-page-logo">
-          <img
+          <Icon
             src={logo}
             alt="Logo"
             width={32}
+            height={32}
           />
 
           <Box
