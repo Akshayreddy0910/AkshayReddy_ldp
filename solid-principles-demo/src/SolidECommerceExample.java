@@ -1,44 +1,33 @@
-interface SolidPayment {
-    void pay(double amount);
-}
-
 class SolidCardPayment implements SolidPayment {
+
     public void pay(double amount) {
         System.out.println("Paid by card: " + amount);
     }
 }
 
 class SolidCashPayment implements SolidPayment {
+
     public void pay(double amount) {
         System.out.println("Paid by cash: " + amount);
     }
 }
 
-interface OrderRepository {
-    void save(String item);
-}
-
 class DatabaseOrderRepository implements OrderRepository {
+
     public void save(String item) {
         System.out.println("Order saved: " + item);
     }
 }
 
-interface Notification {
-    void send(String message);
-}
-
 class EmailNotification implements Notification {
+
     public void send(String message) {
         System.out.println("Email: " + message);
     }
 }
 
-interface Invoice {
-    void generate(double amount);
-}
-
 class SimpleInvoice implements Invoice {
+
     public void generate(double amount) {
         System.out.println("Invoice generated: " + amount);
     }
