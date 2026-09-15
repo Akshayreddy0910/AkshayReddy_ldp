@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Box, Link, Typography, Snackbar, Alert, IconButton } from "@mui/material";
+import {
+  Box,
+  Link,
+  Typography,
+  Snackbar,
+  Alert,
+  IconButton,
+} from "@mui/material";
 
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
@@ -10,7 +17,11 @@ import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
 
 import { LOGIN_FORM_TEXT } from "../../../utils/constants";
-import { validateEmail, validatePassword } from "../../../utils/validators";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../../utils/validators";
+import { loginUser } from "../../../services/authService";
 
 import "./index.css";
 
@@ -22,13 +33,24 @@ const LoginForm = () => {
   const [passwordError, setPasswordError] = useState<string>("");
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const isFormFilled =
+    email.trim() !== "" && password.trim() !== "";
+
+  const handleEmailChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setPassword(event.target.value);
   };
 
@@ -40,7 +62,7 @@ const LoginForm = () => {
     setPasswordError(validatePassword(password));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const emailErrorMessage = validateEmail(email);
@@ -50,12 +72,29 @@ const LoginForm = () => {
     setPasswordError(passwordErrorMessage);
 
     if (!emailErrorMessage && !passwordErrorMessage) {
-      setShowSuccess(true);
+      setIsSubmitting(true);
+
+      try {
+        const user = await loginUser(email, password);
+        console.log("Login successful", user);
+        setShowSuccess(true);
+      } catch (error) {
+        setErrorMessage(
+          error instanceof Error ? error.message : "Login failed"
+        );
+        setShowError(true);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
   const handleCloseSuccess = () => {
     setShowSuccess(false);
+  };
+
+  const handleCloseError = () => {
+    setShowError(false);
   };
 
   return (
@@ -114,6 +153,7 @@ const LoginForm = () => {
       <Button
         text={LOGIN_FORM_TEXT.continueButton}
         type="submit"
+        disabled={!isFormFilled || isSubmitting}
       />
 
       <Snackbar
@@ -128,6 +168,21 @@ const LoginForm = () => {
           variant="filled"
         >
           {LOGIN_FORM_TEXT.successMessage}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={showError}
+        autoHideDuration={3000}
+        onClose={handleCloseError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseError}
+          severity="error"
+          variant="filled"
+        >
+          {errorMessage}
         </Alert>
       </Snackbar>
     </Box>

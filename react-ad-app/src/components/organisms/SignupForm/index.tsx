@@ -22,6 +22,8 @@ import {
   validatePassword,
 } from "../../../utils/validators";
 
+import { signupUser } from "../../../services/authService";
+
 import "./index.css";
 
 const SignupForm = () => {
@@ -34,17 +36,32 @@ const SignupForm = () => {
   const [passwordError, setPasswordError] = useState<string>("");
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const isFormFilled =
+    name.trim() !== "" &&
+    email.trim() !== "" &&
+    password.trim() !== "";
+
+  const handleNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setName(event.target.value);
   };
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setPassword(event.target.value);
   };
 
@@ -60,10 +77,13 @@ const SignupForm = () => {
     setPasswordError(validatePassword(password));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const nameErrorMessage = name ? "" : SIGNUP_FORM_TEXT.nameRequired;
+    const nameErrorMessage = name
+      ? ""
+      : SIGNUP_FORM_TEXT.nameRequired;
+
     const emailErrorMessage = validateEmail(email);
     const passwordErrorMessage = validatePassword(password);
 
@@ -71,8 +91,25 @@ const SignupForm = () => {
     setEmailError(emailErrorMessage);
     setPasswordError(passwordErrorMessage);
 
-    if (!nameErrorMessage && !emailErrorMessage && !passwordErrorMessage) {
-      setShowSuccess(true);
+    if (
+      !nameErrorMessage &&
+      !emailErrorMessage &&
+      !passwordErrorMessage
+    ) {
+      setIsSubmitting(true);
+
+      try {
+        const user = await signupUser(name, email, password);
+        console.log("Signup successful", user);
+        setShowSuccess(true);
+      } catch (error) {
+        setErrorMessage(
+          error instanceof Error ? error.message : "Signup failed"
+        );
+        setShowError(true);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -80,14 +117,28 @@ const SignupForm = () => {
     setShowSuccess(false);
   };
 
+  const handleCloseError = () => {
+    setShowError(false);
+  };
+
   return (
-    <Box component="form" className="signup-form" onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      className="signup-form"
+      onSubmit={handleSubmit}
+    >
       <Box>
-        <Typography variant="h4" className="signup-form-title">
+        <Typography
+          variant="h4"
+          className="signup-form-title"
+        >
           {SIGNUP_FORM_TEXT.title}
         </Typography>
 
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+        >
           {SIGNUP_FORM_TEXT.description}
         </Typography>
       </Box>
@@ -141,13 +192,17 @@ const SignupForm = () => {
       <Button
         text={SIGNUP_FORM_TEXT.signUpButton}
         type="submit"
+        disabled={!isFormFilled || isSubmitting}
       />
 
       <Snackbar
         open={showSuccess}
         autoHideDuration={3000}
         onClose={handleCloseSuccess}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
       >
         <Alert
           onClose={handleCloseSuccess}
@@ -155,6 +210,24 @@ const SignupForm = () => {
           variant="filled"
         >
           {SIGNUP_FORM_TEXT.successMessage}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={showError}
+        autoHideDuration={3000}
+        onClose={handleCloseError}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={handleCloseError}
+          severity="error"
+          variant="filled"
+        >
+          {errorMessage}
         </Alert>
       </Snackbar>
     </Box>

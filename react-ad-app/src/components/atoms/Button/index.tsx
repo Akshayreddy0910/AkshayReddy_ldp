@@ -8,6 +8,7 @@ interface ButtonProps {
   startIcon?: ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
+  disabled?: boolean;
 }
 
 const CustomButton = ({
@@ -17,6 +18,7 @@ const CustomButton = ({
   startIcon,
   onClick,
   type = "button",
+  disabled = false,
 }: ButtonProps) => {
   return (
     <Button
@@ -25,6 +27,7 @@ const CustomButton = ({
       fullWidth={fullWidth}
       startIcon={startIcon}
       onClick={onClick}
+      disabled={disabled}
     >
       {text}
     </Button>
