@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import CustomDivider from ".";
 
 const meta: Meta<typeof CustomDivider> = {
-  title: "Atoms/Divider",
+  title: "Molecules/Divider",
   component: CustomDivider,
 };
 

@@ -1,22 +1,28 @@
-import { Box } from "@mui/material";
-
+import { Box, useTheme } from "@mui/material";
 import Icon from "../../components/atoms/Icon";
 import LoginForm from "../../components/organisms/LoginForm";
 import SocialLogin from "../../components/molecules/SocialLogin";
-
 import backgroundImage from "../../assets/images/login-image.png";
 import logo from "../../assets/icons/logo.svg";
+import { APP_NAME } from "../../utils/constants";
 
 import "./index.css";
 
 const Login = () => {
+  const theme = useTheme();
+
   return (
     <Box className="login-page">
-      <Box className="login-page-left">
+      <Box
+        className="login-page-left"
+        sx={{
+          backgroundColor: theme.palette.secondary.main,
+        }}
+      >
         <Box className="login-page-logo">
           <Icon
             src={logo}
-            alt="Logo"
+            alt="logo"
             width={32}
             height={32}
           />
@@ -24,29 +30,27 @@ const Login = () => {
           <Box
             component="span"
             className="login-page-logo-text"
+            sx={{
+              color: theme.palette.text.primary,
+            }}
           >
-            Seeder
+            {APP_NAME}
           </Box>
         </Box>
 
-        <Box className="login-page-illustration-wrap">
-          <img
-            src={backgroundImage}
-            alt="Illustration"
-            className="login-page-illustration"
-          />
-        </Box>
-      </Box>
-
-      <Box className="login-page-right">
-        <Box className="login-page-right-inner">
+        <Box className="login-page-form">
           <LoginForm />
-
-          <Box className="login-page-social">
-            <SocialLogin />
-          </Box>
+          <SocialLogin />
         </Box>
       </Box>
+
+      <Box
+        className="login-page-right"
+        sx={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundColor: theme.palette.background.default,
+        }}
+      />
     </Box>
   );
 };

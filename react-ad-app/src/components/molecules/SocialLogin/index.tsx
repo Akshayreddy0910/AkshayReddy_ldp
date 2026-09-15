@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import CustomDivider from "../../atoms/Divider";
+import CustomDivider from "../Divider";
 import Icon from "../../atoms/Icon";
 
 import google from "../../../assets/icons/google.svg";

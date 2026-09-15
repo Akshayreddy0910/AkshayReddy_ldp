@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 
 import SignupForm from "../../components/organisms/SignupForm";
 import SocialLogin from "../../components/molecules/SocialLogin";
@@ -9,9 +9,16 @@ import logo from "../../assets/icons/logo.svg";
 import "./index.css";
 
 const Signup = () => {
+  const theme = useTheme();
+
   return (
     <Box className="signup-page">
-      <Box className="signup-page-left">
+      <Box
+        className="signup-page-left"
+        sx={{
+          backgroundColor: theme.palette.secondary.main,
+        }}
+      >
         <Box className="signup-page-logo">
           <img
             src={logo}
@@ -22,6 +29,9 @@ const Signup = () => {
           <Box
             component="span"
             className="signup-page-logo-text"
+            sx={{
+              color: theme.palette.text.primary,
+            }}
           >
             Seeder
           </Box>
@@ -36,7 +46,12 @@ const Signup = () => {
         </Box>
       </Box>
 
-      <Box className="signup-page-right">
+      <Box
+        className="signup-page-right"
+        sx={{
+          backgroundColor: theme.palette.background.default,
+        }}
+      >
         <Box className="signup-page-right-inner">
           <SignupForm />
 
