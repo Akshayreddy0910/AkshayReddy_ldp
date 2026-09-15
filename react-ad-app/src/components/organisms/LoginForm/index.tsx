@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Box, Link, Typography, Snackbar, Alert } from "@mui/material";
+import { Box, Link, Typography, Snackbar, Alert, IconButton } from "@mui/material";
+
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
@@ -16,6 +21,7 @@ const LoginForm = () => {
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
 
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,17 +79,30 @@ const LoginForm = () => {
         onBlur={handleEmailBlur}
         error={Boolean(emailError)}
         helperText={emailError}
+        startIcon={<MailOutlineOutlinedIcon />}
       />
 
       <InputField
         name="password"
         placeholder={LOGIN_FORM_TEXT.passwordPlaceholder}
-        type="password"
+        type={showPassword ? "text" : "password"}
         value={password}
         onChange={handlePasswordChange}
         onBlur={handlePasswordBlur}
         error={Boolean(passwordError)}
         helperText={passwordError}
+        startIcon={<LockOutlinedIcon />}
+        endIcon={
+          <IconButton
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? (
+              <VisibilityOffOutlinedIcon />
+            ) : (
+              <VisibilityOutlinedIcon />
+            )}
+          </IconButton>
+        }
       />
 
       <Box className="login-form-forgot">

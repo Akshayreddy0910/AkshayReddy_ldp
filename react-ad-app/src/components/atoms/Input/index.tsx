@@ -1,15 +1,7 @@
-import { useState } from "react";
 import {
   TextField,
   InputAdornment,
-  IconButton,
 } from "@mui/material";
-
-import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
 interface InputProps {
   label?: string;
@@ -21,6 +13,8 @@ interface InputProps {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
   helperText?: string;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 }
 
 const InputField = ({
@@ -33,33 +27,14 @@ const InputField = ({
   onBlur,
   error = false,
   helperText,
+  startIcon,
+  endIcon,
 }: InputProps) => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const inputType =
-    type === "password"
-      ? showPassword
-        ? "text"
-        : "password"
-      : type;
-
-  const getStartIcon = () => {
-    if (type === "email") {
-      return <MailOutlineOutlinedIcon />;
-    }
-
-    if (type === "password") {
-      return <LockOutlinedIcon />;
-    }
-
-    return <PersonOutlineOutlinedIcon />;
-  };
-
   return (
     <TextField
       label={label}
       placeholder={placeholder}
-      type={inputType}
+      type={type}
       name={name}
       value={value}
       onChange={onChange}
@@ -68,26 +43,17 @@ const InputField = ({
       helperText={helperText}
       slotProps={{
         input: {
-          startAdornment: (
+          startAdornment: startIcon ? (
             <InputAdornment position="start">
-              {getStartIcon()}
+              {startIcon}
             </InputAdornment>
-          ),
+          ) : undefined,
 
-          endAdornment:
-            type === "password" ? (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword((prev) => !prev)}
-                >
-                  {showPassword ? (
-                    <VisibilityOffOutlinedIcon />
-                  ) : (
-                    <VisibilityOutlinedIcon />
-                  )}
-                </IconButton>
-              </InputAdornment>
-            ) : undefined,
+          endAdornment: endIcon ? (
+            <InputAdornment position="end">
+              {endIcon}
+            </InputAdornment>
+          ) : undefined,
         },
       }}
     />

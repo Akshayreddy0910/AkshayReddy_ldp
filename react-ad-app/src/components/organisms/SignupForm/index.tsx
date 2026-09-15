@@ -1,5 +1,17 @@
 import { useState } from "react";
-import { Box, Typography, Snackbar, Alert } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Snackbar,
+  Alert,
+  IconButton,
+} from "@mui/material";
+
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 import Button from "../../atoms/Button";
 import InputField from "../../atoms/Input";
@@ -21,6 +33,7 @@ const SignupForm = () => {
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
 
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +100,7 @@ const SignupForm = () => {
         onBlur={handleNameBlur}
         error={Boolean(nameError)}
         helperText={nameError}
+        startIcon={<PersonOutlineOutlinedIcon />}
       />
 
       <InputField
@@ -98,17 +112,30 @@ const SignupForm = () => {
         onBlur={handleEmailBlur}
         error={Boolean(emailError)}
         helperText={emailError}
+        startIcon={<MailOutlineOutlinedIcon />}
       />
 
       <InputField
         name="password"
         placeholder={SIGNUP_FORM_TEXT.passwordPlaceholder}
-        type="password"
+        type={showPassword ? "text" : "password"}
         value={password}
         onChange={handlePasswordChange}
         onBlur={handlePasswordBlur}
         error={Boolean(passwordError)}
         helperText={passwordError}
+        startIcon={<LockOutlinedIcon />}
+        endIcon={
+          <IconButton
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? (
+              <VisibilityOffOutlinedIcon />
+            ) : (
+              <VisibilityOutlinedIcon />
+            )}
+          </IconButton>
+        }
       />
 
       <Button

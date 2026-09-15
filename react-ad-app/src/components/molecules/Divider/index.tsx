@@ -7,9 +7,9 @@ const DividerLine = styled(Divider)({
 const CustomDivider = () => {
   return (
     <Stack
+      component="div"
       direction="row"
-      alignItems="center"
-      gap={2}
+      sx={{ alignItems: "center", gap: 2 }}
     >
       <DividerLine />
 
