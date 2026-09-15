@@ -1,3 +1,5 @@
+export const APP_NAME = "Seeder";
+
 export const LOGIN_FORM_TEXT = {
   title: "Login to Seeder",
   description: "Enter your email and password to login.",
