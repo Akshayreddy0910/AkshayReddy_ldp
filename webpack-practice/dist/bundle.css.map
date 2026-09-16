@@ -1,1 +1,0 @@
-{"version":3,"file":"bundle.css","mappings":";;;AAAA;AACA;AACA,C","sources":["webpack://webpack-practice/./src/style.css"],"sourcesContent":["body{\r\n    background-color: lightblue;\r\n}"],"names":[],"sourceRoot":""}
