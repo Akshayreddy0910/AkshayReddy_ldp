@@ -3,6 +3,8 @@ import { Box, useTheme } from "@mui/material";
 import SignupForm from "../../components/organisms/SignupForm";
 import SocialLogin from "../../components/molecules/SocialLogin";
 
+import { APP_NAME } from "../../utils/constants";
+
 import backgroundImage from "../../assets/images/signup-image.png";
 import logo from "../../assets/icons/logo.svg";
 
@@ -33,7 +35,7 @@ const Signup = () => {
               color: theme.palette.text.primary,
             }}
           >
-            Seeder
+            {APP_NAME}
           </Box>
         </Box>
 
