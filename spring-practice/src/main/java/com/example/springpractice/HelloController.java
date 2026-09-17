@@ -1,5 +1,6 @@
 package com.example.springpractice;
 
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +53,7 @@ public class HelloController {
 
     @PostMapping("/user")
     @ResponseBody
-    public String createUser(@RequestBody User user) {
+    public String createUser(@Valid @RequestBody User user) {
         return "User created: " + user.getName()
                 + ", Age: " + user.getAge();
     }
@@ -85,5 +86,11 @@ public class HelloController {
         mv.addObject("role", "Java Developer");
 
         return mv;
+    }
+
+    @GetMapping("/error-test")
+    @ResponseBody
+    public String errorTest() {
+        throw new RuntimeException("Something went wrong");
     }
 }
