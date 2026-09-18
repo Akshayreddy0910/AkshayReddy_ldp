@@ -21,4 +21,34 @@ public class UserController {
 
         return UserMapper.toResponseDto(user);
     }
+
+    @PutMapping("/{id}")
+    public UserResponseDto updateUser(
+            @PathVariable int id,
+            @Valid @RequestBody UserCreateRequestDto requestDto) {
+
+        User user = UserMapper.toUser(requestDto);
+
+        user.setId(id);
+
+        return UserMapper.toResponseDto(user);
+    }
+
+    @PatchMapping("/{id}")
+    public UserResponseDto partialUpdateUser(
+            @PathVariable int id,
+            @RequestBody UserCreateRequestDto requestDto) {
+
+        User user = UserMapper.toUser(requestDto);
+
+        user.setId(id);
+
+        return UserMapper.toResponseDto(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable int id) {
+
+        return "User with id " + id + " deleted successfully";
+    }
 }
