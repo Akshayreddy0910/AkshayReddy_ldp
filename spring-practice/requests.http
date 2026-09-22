@@ -1,0 +1,27 @@
+### GET
+GET http://localhost:8080/spring_practice_war_exploded/api/hello
+
+
+### POST
+POST http://localhost:8080/spring_practice_war_exploded/api/hello
+
+
+### PUT
+PUT http://localhost:8080/spring_practice_war_exploded/api/hello
+
+
+### PATCH
+PATCH http://localhost:8080/spring_practice_war_exploded/api/hello
+
+
+### DELETE
+DELETE http://localhost:8080/spring_practice_war_exploded/api/hello
+
+### Create User
+POST http://localhost:8080/spring_practice_war_exploded/api/user
+Content-Type: application/json
+
+{
+  "name": "Akshay",
+  "age": 22
+}
