@@ -24,12 +24,9 @@ JOIN film_category fc
     ON f.film_id = fc.film_id
 JOIN category c
     ON fc.category_id = c.category_id
-JOIN rental r
-    ON i.inventory_id = r.inventory_id
 WHERE s.first_name = 'Jon'
 AND s.last_name = 'Stephens'
 AND c.name = 'Sci-Fi';
-
 
 -- Q3. Find the total sales from Animation movies
 SELECT SUM(p.amount) AS total_sales
