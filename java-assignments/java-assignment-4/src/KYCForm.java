@@ -13,14 +13,40 @@ public class KYCForm {
         LocalDate signupDate = LocalDate.parse(signupInput, formatter);
         LocalDate currentDate = LocalDate.parse(currentInput, formatter);
 
-        LocalDate anniversary = LocalDate.of(
-                currentDate.getYear(),
-                signupDate.getMonth(),
-                signupDate.getDayOfMonth()
-        );
+        LocalDate anniversary;
+
+        if (signupDate.getMonthValue() == 2 &&
+                signupDate.getDayOfMonth() == 29 &&
+                !currentDate.isLeapYear()) {
+
+            anniversary = LocalDate.of(
+                    currentDate.getYear(),
+                    2,
+                    28
+            );
+
+        } else {
+
+            anniversary = LocalDate.of(
+                    currentDate.getYear(),
+                    signupDate.getMonth(),
+                    signupDate.getDayOfMonth()
+            );
+        }
 
         if (!anniversary.isAfter(signupDate)) {
             anniversary = anniversary.plusYears(1);
+
+            if (signupDate.getMonthValue() == 2 &&
+                    signupDate.getDayOfMonth() == 29 &&
+                    !anniversary.isLeapYear()) {
+
+                anniversary = LocalDate.of(
+                        anniversary.getYear(),
+                        2,
+                        28
+                );
+            }
         }
 
         long days = ChronoUnit.DAYS.between(currentDate, anniversary);
