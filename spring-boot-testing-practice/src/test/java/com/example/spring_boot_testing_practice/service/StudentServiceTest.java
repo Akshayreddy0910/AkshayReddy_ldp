@@ -2,6 +2,7 @@ package com.example.spring_boot_testing_practice.service;
 
 import com.example.spring_boot_testing_practice.model.Student;
 import com.example.spring_boot_testing_practice.repository.StudentRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,6 +36,11 @@ class StudentServiceTest {
                 "Spring Boot",
                 21
         );
+    }
+
+    @AfterEach
+    void tearDown() {
+        student = null;
     }
 
     @Test
