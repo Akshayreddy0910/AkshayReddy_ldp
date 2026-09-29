@@ -1,4 +1,5 @@
 package com.example.spring_rest_practice.controller;
+import com.example.spring_rest_practice.dto.MessageResponse;
 
 import com.example.spring_rest_practice.dto.StudentRequest;
 import com.example.spring_rest_practice.exception.StudentNotFoundException;
@@ -96,7 +97,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(
+    public ResponseEntity<MessageResponse> deleteStudent(
             @PathVariable Long id) {
 
         boolean deleted =
@@ -106,6 +107,10 @@ public class StudentController {
             throw new StudentNotFoundException(id);
         }
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(
+                new MessageResponse(
+                        "Student with ID " + id + " deleted successfully"
+                )
+        );
     }
 }
