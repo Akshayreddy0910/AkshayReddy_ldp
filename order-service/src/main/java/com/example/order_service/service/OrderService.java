@@ -4,6 +4,7 @@ import com.example.order_service.dto.BookResponse;
 import com.example.order_service.model.Order;
 import com.example.order_service.repository.OrderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
@@ -64,10 +65,15 @@ public class OrderService {
 
     public BookResponse getBookFromBookService(Long bookId) {
 
-        return restClient
-                .get()
-                .uri("/books/{id}", bookId)
-                .retrieve()
-                .body(BookResponse.class);
+        try {
+            return restClient
+                    .get()
+                    .uri("/books/{id}", bookId)
+                    .retrieve()
+                    .body(BookResponse.class);
+
+        } catch (HttpClientErrorException.NotFound e) {
+            return null;
+        }
     }
 }

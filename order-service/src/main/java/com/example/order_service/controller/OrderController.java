@@ -1,11 +1,12 @@
 package com.example.order_service.controller;
 
+import com.example.order_service.dto.BookResponse;
 import com.example.order_service.model.Order;
 import com.example.order_service.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.order_service.dto.BookResponse;
+
 import java.util.List;
 
 @RestController
@@ -80,20 +81,29 @@ public class OrderController {
 
         return ResponseEntity.ok("Order deleted successfully");
     }
+
     @GetMapping("/{id}/book")
-    public ResponseEntity<BookResponse> getBookForOrder(
+    public ResponseEntity<?> getBookForOrder(
             @PathVariable Long id) {
 
         Order order = orderService.getOrderById(id);
 
         if (order == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Book not found");
         }
 
         BookResponse book =
                 orderService.getBookFromBookService(
                         order.getBookId()
                 );
+
+        if (book == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Book not found");
+        }
 
         return ResponseEntity.ok(book);
     }

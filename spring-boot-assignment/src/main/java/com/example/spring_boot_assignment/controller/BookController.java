@@ -25,12 +25,14 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
+    public ResponseEntity<?> getBookById(@PathVariable Long id) {
 
         Book book = bookService.getBookById(id);
 
         if (book == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Book not found");
         }
 
         return ResponseEntity.ok(book);
