@@ -1,0 +1,27 @@
+[
+  {
+    "id": "Q1",
+    "question": "Which products generated the highest revenue?",
+    "expected_behavior": "Refine to total revenue per product, ranked descending; SQL groups by product and sums quantity * unit_price."
+  },
+  {
+    "id": "Q2",
+    "question": "How much revenue did we generate in February 2026?",
+    "expected_behavior": "Use sale_date range for February 2026 and sum quantity * unit_price."
+  },
+  {
+    "id": "Q3",
+    "question": "Which customers spent the most?",
+    "expected_behavior": "Clarify or define spending as total sales value; if clarified, group by customer and rank descending."
+  },
+  {
+    "id": "Q4",
+    "question": "Which city had the most sales revenue?",
+    "expected_behavior": "Join customers to sales, group by city, and sum quantity * unit_price."
+  },
+  {
+    "id": "Q5",
+    "question": "What is our best product?",
+    "expected_behavior": "Ask a clarification question because best could mean revenue, quantity, or number of orders."
+  }
+]
