@@ -1,0 +1,5 @@
+.venv/
+.env
+__pycache__/
+experiments/*.csv
+evals/logs/*
