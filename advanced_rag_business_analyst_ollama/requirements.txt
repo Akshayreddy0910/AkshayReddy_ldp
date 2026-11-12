@@ -1,0 +1,7 @@
+streamlit>=1.36,<2
+chromadb>=0.5.5,<2
+sentence-transformers>=3.0,<6
+pypdf>=4.2,<7
+beautifulsoup4>=4.12
+requests>=2.32
+ddgs>=9.0
